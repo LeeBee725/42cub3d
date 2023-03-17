@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 19:46:28 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:59:06 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_elem_type	_detact_type(char *line)
 	t_elem_type					type;
 
 	type = CEIL;
-	while (elems[type])
+	while (type != MAP)
 	{
 		if (ft_strncmp(elems[type], line, 2) == 0)
 			return (type);

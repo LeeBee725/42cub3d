@@ -6,7 +6,7 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/17 19:26:40 by junhelee         ###   ########.fr        #
+#    Updated: 2023/03/17 23:56:16 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,21 +17,31 @@ SRCS	:=	cub3d.c error.c init_data.c map_parser.c
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
-COMPILE	:=	$(CC) $(CFLAGS)
+COMPILE	:=	$(CC) -g $(CFLAGS)
 
 RM		:= rm -rf
 NORM	:= norminette
 MKDIR	:= mkdir -p
 
 LIBFT	:=	./libft
+UNAME_S	:=	$(shell uname -s)
+ifeq ($(UNAME_S), Darwin)
 MLX_DIR	:=	./mlx
 INCLUDES:=	-I./include -I$(LIBFT) -I$(MLX_DIR)
+else
+MLX_DIR	:=	./mlx_linux
+INCLUDES:=	-I./include -I$(LIBFT) -I$(MLX_DIR) -O3
+endif
 
 OBJ_DIR	:=	./object
 OBJS	:=	$(patsubst %,$(OBJ_DIR)/%,$(SRCS:%.c=%.o))
 
 LINK_FT	:=	-L$(LIBFT) -lft
+ifeq ($(UNAME_S), Darwin)
 LINK_MLX:=	-L$(MLX_DIR) -lmlx -framework OpenGL -framework APPKit
+else
+LINK_MLX:=	-L$(MLX_DIR) -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz
+endif
 LINKING	:=	$(LINK_MLX) $(LINK_FT)
 
 all: $(NAME)
@@ -43,7 +53,7 @@ $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -C $(MLX_DIR)
-	$(COMPILE) $(LINKING) $^ -o $@
+	$(COMPILE) $^ $(LINKING) -o $@
 
 clean:
 	@$(MAKE) -C $(LIBFT) clean
