@@ -6,14 +6,14 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/17 14:46:27 by junhelee         ###   ########.fr        #
+#    Updated: 2023/03/17 15:48:42 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 SRCS_DIR:=	./src
-SRCS	:=	cub3d.c
+SRCS	:=	cub3d.c error.c init_data.c
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror

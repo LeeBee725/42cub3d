@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 14:59:59 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:46:11 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
+	if (argc < 2)
+		return (print_err(NO_ARGUMENT));
+	init_data(argv[1]);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 900, 600, "test");
 	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_loop(data.mlx);
-	return (0);
+	return (NO_ERROR);
 }
