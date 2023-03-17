@@ -6,12 +6,16 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 16:03:46 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:15:42 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 # include "mlx.h"
 # include "libft.h"

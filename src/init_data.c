@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 16:10:35 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:32:34 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,11 @@ static void	_check_extension(const char *const file_name)
 
 void	init_data(char *const file_name)
 {
+	int	fd;
+
 	_check_extension(file_name);
+	fd = open(file_name, O_RDONLY);
+	if (fd == FAIL_FD)
+		exit(print_sys_err(SYS_FILE_OPEN_FAIL));
+	close(fd);
 }
