@@ -6,7 +6,7 @@
 #    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/17 15:47:53 by sryou            ###   ########.fr        #
+#    Updated: 2023/03/18 16:56:46 by sryou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS	:=	cub3d.c \
 			ft_mlx.c \
 			calculate.c \
 			draw.c \
-			render.c
+			render.c \
+			move.c
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror

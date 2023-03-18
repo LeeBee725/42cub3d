@@ -1,102 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calculate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
+/*   Updated: 2023/03/18 16:57:52 by sryou            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void	setStep(t_ray *ray)
+void	set_step(t_ray *ray)
 {
-	if (ray->rayX < 0)
-		ray->stepX = -1;
+	if (ray->ray_x < 0)
+		ray->step_x = -1;
 	else
-		ray->stepX = 1;
-	if (ray->rayY < 0)
-		ray->stepY = -1;
+		ray->step_x = 1;
+	if (ray->ray_y < 0)
+		ray->step_y = -1;
 	else
-		ray->stepY = 1;
+		ray->step_y = 1;
 }
 
-void	setDistance(t_ray *ray)
+void	set_distance(t_ray *ray)
 {
-	if (ray->rayX < 0)
-		ray->distanceX = (ray->userX - ray->mapX) * ray->deltaDistanceX;
+	if (ray->ray_x < 0)
+		ray->distance_x = (ray->user_x - ray->map_x) * \
+			ray->delta_distance_x;
 	else
-		ray->distanceX = (ray->mapX + 1 - ray->userX) * ray->deltaDistanceX;
-	if (ray->rayY < 0)
-		ray->distanceY = (ray->userY - ray->mapY) * ray->deltaDistanceY;
+		ray->distance_x = (ray->map_x + 1 - ray->user_x) * \
+			ray->delta_distance_x;
+	if (ray->ray_y < 0)
+		ray->distance_y = (ray->user_y - ray->map_y) * \
+			ray->delta_distance_y;
 	else
-		ray->distanceY = (ray->mapY + 1 - ray->userY) * ray->deltaDistanceY;
+		ray->distance_y = (ray->map_y + 1 - ray->user_y) * \
+			ray->delta_distance_y;
 }
 
-double	ft_abs(double d)
+void	make_ray(t_data *data, t_ray *ray, int x)
 {
-	if (d < 0)
-		return -d;
-	else
-		return d;
+	double	unit;
+
+	unit = 2 * x / (double)WIDTH - 1;
+	ray->ray_x = data->cam_x + data->fov_x * unit;
+	ray->ray_y = data->cam_y + data->fov_y * unit;
+	ray->map_x = data->user_x;
+	ray->map_y = data->user_y;
+	ray->user_x = data->user_x;
+	ray->user_y = data->user_y;
+	ray->delta_distance_x = fabs(1 / ray->ray_x);
+	ray->delta_distance_y = fabs(1 / ray->ray_y);
 }
 
-void	makeRay(int x, t_data *data, t_ray *ray)
+void	calculate_ray(t_data *data, t_ray *ray, int x)
 {
-	double	unit = 2 * x / (double)WIDTH - 1;
+	int	hit;
 
-	ray->rayX = data->camX + data->fovX * unit;
-	ray->rayY = data->camY + data->fovY * unit;
-	ray->mapX = data->userX;
-	ray->mapY = data->userY;
-	ray->userX = data->userX;
-	ray->userY = data->userY;
-	ray->deltaDistanceX = ft_abs(1 / ray->rayX);
-	ray->deltaDistanceY = ft_abs(1 / ray->rayY);
+	make_ray(data, ray, x);
+	set_step(ray);
+	set_distance(ray);
+	hit = FALSE;
+	while (hit == FALSE)
+	{
+		if (ray->distance_x < ray->distance_y)
+		{
+			ray->distance_x += ray->delta_distance_x;
+			ray->map_x += ray->step_x;
+			ray->grid = X_DIRECTION;
+		}
+		else
+		{
+			ray->distance_y += ray->delta_distance_y;
+			ray->map_y += ray->step_y;
+			ray->grid = Y_DIRECTION;
+		}
+		if (data->map[ray->map_y][ray->map_x] > 0)
+			hit = TRUE;
+	}
 }
 
 void	calculate(t_data *data)
 {
-	int	x;
+	t_ray	ray;
+	int		x;
 
-	x=0;
+	x = 0;
 	while (x < WIDTH)
 	{
-		t_ray	ray;
-		makeRay(x, data, &ray);
-		setStep(&ray);
-		setDistance(&ray);
-
-		int hit = FALSE;
-		int grid;
-		while (hit == FALSE)
-		{
-			if (ray.distanceX < ray.distanceY)
-			{
-				ray.distanceX += ray.deltaDistanceX;
-				ray.mapX += ray.stepX;
-				grid = X_DIRECTION;
-			}
-			else
-			{
-				ray.distanceY += ray.deltaDistanceY;
-				ray.mapY += ray.stepY;
-				grid = Y_DIRECTION;
-			}
-			if (data->map[ray.mapY][ray.mapX] > 0)
-				hit = TRUE;
-		}
-
-		if (x%10 == 0)
-		{
-			printf("grid : %s\n", grid == X_DIRECTION ? "X_DIRECTION": "Y_DIRECTION");
-			//printf("%f, %f, %f, %f\n", ray.distanceX, ray.distanceY, ray.rayX, ray.rayY);
-			for (int i=0;i<50;i++)
-			{
-				double myx, myy;
-				double distance;
-				if (grid == X_DIRECTION)
-					distance = ray.distanceX - ray.deltaDistanceX;
-				else
-					distance = ray.distanceY - ray.deltaDistanceY;
-
-				myx = ray.userX + distance * ray.rayX * ((double)i / 49);
-				myy = ray.userY + distance * ray.rayY * ((double)i / 49);
-				drawPixel(data, myx * REC_WIDTH, myy * REC_HEIGHT);
-				//printf("idx %d : %f, %f\n", i, myx,myy);
-			}
-		}
+		calculate_ray(data, &ray, x);
+		draw_ray_2d(data, &ray);
 		x++;
 	}
 }
