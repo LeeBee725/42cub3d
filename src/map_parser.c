@@ -6,60 +6,117 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 23:59:06 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:30:18 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "map_parser.h"
 
 static int	_is_empty_line(char *line)
 {
-	size_t	i;
+	int	i;
 
-	if (line == NULL)
+	if (!line)
 		return (TRUE);
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '\t' && line[i] != ' ' && line[i] != '\n' && \
-			line[i] != '\v' && line[i] != '\f' && line[i] != '\r')
+		if (is_space(line[i]))
 			return (FALSE);
 		++i;
 	}
 	return (TRUE);
 }
 
-static t_elem_type	_detact_type(char *line)
+static t_elem	_get_element_type(char *line)
 {
-	static const char *const	elems[6] = {"C ", "F ", "EA", "WE", "SO", "NO"};
-	t_elem_type					type;
+	static const char	*identifier[6] = {"EA", "WE", "SO", "NO", "C ", "F "};
+	t_elem				elem;
 
-	type = CEIL;
-	while (type != MAP)
+	elem = EAST;
+	while (elem != MAP)
 	{
-		if (ft_strncmp(elems[type], line, 2) == 0)
-			return (type);
-		++type;
+		if (ft_strncmp(line, identifier[elem], 2) == 0)
+			return (elem);
+		++elem;
 	}
 	return (MAP);
 }
 
-void	set_map_data(int fd, t_data *const data)
+int	is_space(const unsigned char c)
+{
+	if (c == '\t' || c == ' ' || c == '\n' || \
+		c == '\v' || c == '\f' || c == '\r')
+		return (TRUE);
+	return (FALSE);
+}
+
+void	init_map_data(t_map_data *const data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->texture_path[i] = NULL;
+		++i;
+	}
+	data->str_color_ceiling = NULL;
+	data->str_color_floor = NULL;
+	data->map_width = 0;
+	data->map_height = 0;
+	data->map = NULL;
+}
+
+void	set_map_data(int fd, t_map_data *const data)
 {
 	char		*line;
-	t_elem_type	type;
+	t_elem		elem;
 
 	line = get_next_line(fd);
 	while (line)
 	{
 		if (!_is_empty_line(line))
 		{
-			type = _detact_type(line);
-			printf("%s", line);
-			printf("%d\n", type);
+			elem = _get_element_type(line);
+			if (elem == MAP)
+				break ;
+			set_element(line, elem, data);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	(void)data;
+	print_map_data(*data);
+	// set_map(fd, line, data);
+}
+
+// TODO: remove
+#include <stdio.h> // TODO: remove
+
+void	print_map_data(t_map_data data)
+{
+	int	i;
+
+	printf("Data information\n");
+	printf("---------------------------------------------\n");
+	printf("EAST_TEXTURE: %s\n", data.texture_path[EAST]);
+	printf("WEST_TEXTURE: %s\n", data.texture_path[WEST]);
+	printf("SOUTH_TEXTURE: %s\n", data.texture_path[SOUTH]);
+	printf("NORTH_TEXTURE: %s\n", data.texture_path[NORTH]);
+	printf("CEILING COLOR: %s\n", data.str_color_ceiling);
+	printf("FLOOR COLOR: %s\n", data.str_color_floor);
+	printf("MAP_WIDTH: %d\n", data.map_width);
+	printf("MAP_HEIGHT : %d\n", data.map_height);
+	if (!data.map)
+	{
+		printf("MAP : %s\n", (char *)data.map);
+		return ;
+	}
+	printf("MAP :\n");
+	i = 0;
+	while (data.map[i])
+	{
+		printf("%s\n", data.map[i]);
+		++i;
+	}
 }

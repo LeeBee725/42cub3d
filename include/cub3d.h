@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 19:30:52 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:48:04 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,7 @@
 # include "mlx.h"
 # include "libft.h"
 # include "error.h"
-
-# define TRUE 1
-# define FALSE 0
-
-typedef enum e_elem_type {
-	CEIL,
-	FLOOR,
-	WALL_EAST,
-	WALL_WEST,
-	WALL_SOUTH,
-	WALL_NORTH,
-	MAP
-}	t_elem_type;
-
-typedef enum e_orient {
-	EAST,
-	WEST,
-	SOUTH,
-	NORTH
-}	t_orient;
+# include "map_parser.h"
 
 typedef struct s_trgb {
 	unsigned char	t;
@@ -53,18 +34,23 @@ typedef union s_color {
 	t_trgb	trgb;
 }	t_color;
 
-typedef struct s_data {
+typedef struct s_image {
+	void	*instance;
+	int		width;
+	int		height;
+}	t_image;
+
+typedef struct s_config {
 	void			*mlx;
 	void			*win;
-	unsigned int	width;
-	unsigned int	height;
+	t_image			wall_img[4];
+	t_color			color_ceiling;
+	t_color			color_floor;
+	int				map_width;
+	int				map_height;
 	char			**map;
-	void			*img_wall[4];
-	t_color			color_f;
-	t_color			color_c;
-}	t_data;
+}	t_config;
 
-void	init_data(char *const file_name, t_data *const data);
-void	set_map_data(int fd, t_data *const data);
+void	init_config(char *const file_name, t_config *const data);
 
 #endif

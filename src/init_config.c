@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/17 18:55:56 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:21:13 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,17 @@ static void	_check_extension(const char *const file_name)
 		exit(print_err(NAT_MATCH_EXTENSION));
 }
 
-void	init_data(char *const file_name, t_data *const data)
+void	init_config(char *const file_name, t_config *const data)
 {
-	int		fd;
+	int			fd;
+	t_map_data	map_data;
 
+	init_map_data(&map_data);
 	_check_extension(file_name);
 	fd = open(file_name, O_RDONLY);
 	if (fd == FAIL_FD)
 		exit(print_sys_err(SYS_FILE_OPEN_FAIL));
-	set_map_data(fd, data);
+	set_map_data(fd, &map_data);
+	(void)data;
 	close(fd);
 }
