@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 16:36:32 by junhelee         ###   ########.fr       */
+/*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
+/*   Updated: 2023/03/22 17:04:12 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "map_parser.h"
 
-int	main(int argc, char *argv[])
+int	is_space(const unsigned char c)
 {
-	t_config	data;
+	if (c == '\t' || c == ' ' || c == '\n' || \
+		c == '\v' || c == '\f' || c == '\r')
+		return (TRUE);
+	return (FALSE);
+}
 
-	if (argc < 2)
-		return (print_err(NO_ARGUMENT));
-	init_config(argv[1], &data);
-	return (NO_ERROR);
+int	is_empty_line(char *line)
+{
+	int	i;
+
+	if (!line)
+		return (TRUE);
+	i = 0;
+	while (line[i])
+	{
+		if (!is_space(line[i]))
+			return (FALSE);
+		++i;
+	}
+	return (TRUE);
 }

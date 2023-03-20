@@ -6,50 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/20 18:25:51 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:11:42 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-
-static int	_is_empty_line(char *line)
-{
-	int	i;
-
-	if (!line)
-		return (TRUE);
-	i = 0;
-	while (line[i])
-	{
-		if (!is_space(line[i]))
-			return (FALSE);
-		++i;
-	}
-	return (TRUE);
-}
-
-static t_elem	_get_element_type(char *line)
-{
-	static const char	*identifier[6] = {"EA", "WE", "SO", "NO", "C ", "F "};
-	t_elem				elem;
-
-	elem = EAST;
-	while (elem != MAP)
-	{
-		if (ft_strncmp(line, identifier[elem], 2) == 0)
-			return (elem);
-		++elem;
-	}
-	return (MAP);
-}
-
-int	is_space(const unsigned char c)
-{
-	if (c == '\t' || c == ' ' || c == '\n' || \
-		c == '\v' || c == '\f' || c == '\r')
-		return (TRUE);
-	return (FALSE);
-}
 
 void	init_map_data(t_map_data *const data)
 {
@@ -63,9 +24,60 @@ void	init_map_data(t_map_data *const data)
 	}
 	data->str_color_ceiling = NULL;
 	data->str_color_floor = NULL;
-	data->map_width = 0;
-	data->map_height = 0;
-	data->map = NULL;
+	data->map_max_width = 0;
+	data->map_max_height = 0;
+	data->raw_map = NULL;
+}
+
+void	free_map_data(t_map_data *const data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(data->texture_path[i]);
+		++i;
+	}
+	free(data->str_color_ceiling);
+	free(data->str_color_floor);
+	ft_lstclear(&data->raw_map, free);
+	init_map_data(data);
+}
+
+static void	_increase_map_size(t_map_data *data, int line_width)
+{
+	++data->map_max_height;
+	if (data->map_max_width < line_width - 1)
+		data->map_max_width = line_width - 1;
+}
+
+static void	_set_raw_map(int fd, char *const line, t_map_data *data)
+{
+	t_list	*cur;
+	char	*next_line;
+	int		line_len;
+
+	data->raw_map = ft_lstnew(line);
+	if (!data->raw_map)
+		return ;
+	data->map_max_height = 1;
+	next_line = get_next_line(fd);
+	while (!is_empty_line(next_line))
+	{
+		cur = ft_lstnew(next_line);
+		if (!cur)
+		{
+			ft_lstclear(&data->raw_map, free);
+			return ;
+		}
+		ft_lstadd_back(&data->raw_map, cur);
+		line_len = ft_strlen(next_line);
+		_increase_map_size(data, line_len);
+		next_line = get_next_line(fd);
+	}
+	if (next_line && is_empty_line(next_line))
+		free(next_line);
 }
 
 void	set_map_data(int fd, t_map_data *const data)
@@ -76,9 +88,9 @@ void	set_map_data(int fd, t_map_data *const data)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!_is_empty_line(line))
+		if (!is_empty_line(line))
 		{
-			elem = _get_element_type(line);
+			elem = get_element_type(line);
 			if (elem == MAP)
 				break ;
 			set_element(line, elem, data);
@@ -86,8 +98,8 @@ void	set_map_data(int fd, t_map_data *const data)
 		free(line);
 		line = get_next_line(fd);
 	}
+	_set_raw_map(fd, line, data);
 	print_map_data(*data);
-	// set_map(fd, line, data);
 }
 
 // TODO: remove
@@ -95,7 +107,7 @@ void	set_map_data(int fd, t_map_data *const data)
 
 void	print_map_data(t_map_data data)
 {
-	int	i;
+	t_list	*cur;
 
 	printf("Data information\n");
 	printf("---------------------------------------------\n");
@@ -105,18 +117,18 @@ void	print_map_data(t_map_data data)
 	printf("NORTH_TEXTURE: %s\n", data.texture_path[NORTH]);
 	printf("CEILING COLOR: %s\n", data.str_color_ceiling);
 	printf("FLOOR COLOR: %s\n", data.str_color_floor);
-	printf("MAP_WIDTH: %d\n", data.map_width);
-	printf("MAP_HEIGHT : %d\n", data.map_height);
-	if (!data.map)
+	printf("MAP_WIDTH: %d\n", data.map_max_width);
+	printf("MAP_HEIGHT : %d\n", data.map_max_height);
+	if (!data.raw_map)
 	{
-		printf("MAP : %s\n", (char *)data.map);
+		printf("MAP : %s\n", (char *)data.raw_map);
 		return ;
 	}
 	printf("MAP :\n");
-	i = 0;
-	while (data.map[i])
+	cur = data.raw_map;
+	while (cur)
 	{
-		printf("%s\n", data.map[i]);
-		++i;
+		printf("%s\n", (char *)cur->content);
+		cur = cur->next;
 	}
 }

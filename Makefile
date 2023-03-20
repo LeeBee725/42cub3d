@@ -6,14 +6,14 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/18 17:43:49 by junhelee         ###   ########.fr        #
+#    Updated: 2023/03/22 16:52:16 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 SRCS_DIR:=	./src
-SRCS	:=	cub3d.c error.c init_config.c map_parser.c map_elem.c
+SRCS	:=	cub3d.c error.c init_config.c map_parser.c map_elem.c map_utils.c
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
@@ -51,7 +51,7 @@ $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 	$(COMPILE) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(LIBFT) bonus
 	@$(MAKE) -C $(MLX_DIR)
 	$(COMPILE) $^ $(LINKING) -o $@
 

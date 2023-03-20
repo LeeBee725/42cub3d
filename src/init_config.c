@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 18:21:13 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:36:28 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	init_config(char *const file_name, t_config *const data)
 	if (fd == FAIL_FD)
 		exit(print_sys_err(SYS_FILE_OPEN_FAIL));
 	set_map_data(fd, &map_data);
+	free_map_data(&map_data);
 	(void)data;
 	close(fd);
 }
