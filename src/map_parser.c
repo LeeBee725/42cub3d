@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 18:30:18 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:25:51 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	_is_empty_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (is_space(line[i]))
+		if (!is_space(line[i]))
 			return (FALSE);
 		++i;
 	}
