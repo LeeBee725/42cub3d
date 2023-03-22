@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 17:11:42 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:31:29 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_map_data(t_map_data *const data)
 	}
 	data->str_color_ceiling = NULL;
 	data->str_color_floor = NULL;
+	data->err_msg = NULL;
 	data->map_max_width = 0;
 	data->map_max_height = 0;
 	data->raw_map = NULL;
@@ -41,6 +42,8 @@ void	free_map_data(t_map_data *const data)
 	}
 	free(data->str_color_ceiling);
 	free(data->str_color_floor);
+	if (data->err_msg)
+		free(data->err_msg);
 	ft_lstclear(&data->raw_map, free);
 	init_map_data(data);
 }
