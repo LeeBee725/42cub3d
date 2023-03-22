@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 19:31:29 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:47:17 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,40 @@ void	free_map_data(t_map_data *const data)
 	init_map_data(data);
 }
 
-static void	_increase_map_size(t_map_data *data, int line_width)
+static void	_set_map_list(char *const line, t_map_data *data)
 {
+	t_list	*cur;
+	int		len;
+
+	cur = NULL;
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	cur = ft_lstnew(line);
+	if (!cur)
+	{
+		ft_lstclear(&data->raw_map, free);
+		exit_with_sys_err(SYS_HEAP_ALLOCATE_FAIL);
+	}
+	ft_lstadd_back(&data->raw_map, cur);
 	++data->map_max_height;
-	if (data->map_max_width < line_width - 1)
-		data->map_max_width = line_width - 1;
+	if (data->map_max_width < len - 1)
+		data->map_max_width = len - 1;
 }
 
 static void	_set_raw_map(int fd, char *const line, t_map_data *data)
 {
-	t_list	*cur;
 	char	*next_line;
-	int		line_len;
 
+	line[ft_strlen(line) - 1] = '\0';
 	data->raw_map = ft_lstnew(line);
 	if (!data->raw_map)
-		return ;
+		exit_with_sys_err(SYS_HEAP_ALLOCATE_FAIL);
 	data->map_max_height = 1;
 	next_line = get_next_line(fd);
 	while (!is_empty_line(next_line))
 	{
-		cur = ft_lstnew(next_line);
-		if (!cur)
-		{
-			ft_lstclear(&data->raw_map, free);
-			return ;
-		}
-		ft_lstadd_back(&data->raw_map, cur);
-		line_len = ft_strlen(next_line);
-		_increase_map_size(data, line_len);
+		_set_map_list(next_line, data);
 		next_line = get_next_line(fd);
 	}
 	if (next_line && is_empty_line(next_line))

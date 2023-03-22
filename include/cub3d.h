@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 19:27:04 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:17:47 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_config {
 	char			**map;
 }	t_config;
 
-void	init_config(char *const file_name, t_config *const data);
+void	init_config(t_config *const data);
+void	free_config(t_config *const conf);
+void	set_config(char *const file_name, t_config *const data);
 
 #endif
