@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 16:36:28 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:23:18 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	_check_extension(const char *const file_name)
 		exit(print_err(NAT_MATCH_EXTENSION));
 }
 
-void	init_config(char *const file_name, t_config *const data)
+void	init_config(char *const file_name, t_config *const conf)
 {
 	int			fd;
 	t_map_data	map_data;
@@ -53,6 +53,6 @@ void	init_config(char *const file_name, t_config *const data)
 		exit(print_sys_err(SYS_FILE_OPEN_FAIL));
 	set_map_data(fd, &map_data);
 	free_map_data(&map_data);
-	(void)data;
+	(void)conf;
 	close(fd);
 }
