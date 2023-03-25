@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 17:04:12 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:49:22 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,19 @@ int	is_empty_line(char *line)
 		++i;
 	}
 	return (TRUE);
+}
+
+void	free_2d(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		++i;
+	}
+	free(arr);
 }

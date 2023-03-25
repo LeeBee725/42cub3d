@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 19:08:04 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:49:20 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ typedef struct s_map_data {
 	t_list	*raw_map;
 }	t_map_data;
 
-int		is_space(const unsigned char c);
-int		is_empty_line(char *line);
-
 void	init_map_data(t_map_data *const data);
 void	set_map_data(int fd, t_map_data *const data);
 void	free_map_data(t_map_data *const data);
@@ -69,10 +66,18 @@ t_elem	get_element_type(char *line);
 char	**get_rect_map(t_map_data *const map_data);
 
 //	map_error.c
+int		set_err(t_map_data *const d, const t_elem e, const char *msg);
 void	exit_invalid_elem(t_map_data *const data, void (*f)(const char *msg));
 void	print_dynamic_err_msg(const char *msg);
 
+//	map_utils.c
+int		is_space(const unsigned char c);
+int		is_empty_line(char *line);
+void	free_2d(char **arr);
+
 //	map_validate.c
 int		validate_img_ext(t_map_data *const data);
+int		validate_color_str(t_map_data *const data);
+int		validate_color(t_map_data *const data, const char *str, const t_elem e);
 
 #endif

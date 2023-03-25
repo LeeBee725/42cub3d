@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 17:18:56 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 21:08:13 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	_set_raw_map(int fd, char *const line, t_map_data *data)
 {
 	char	*next_line;
 
+	if (!line)
+		return ;
 	line[ft_strlen(line) - 1] = '\0';
 	data->raw_map = ft_lstnew(line);
 	if (!data->raw_map)

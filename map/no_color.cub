@@ -3,9 +3,6 @@ SO ./image/bluestone.xpm
 WE ./image/eagle.xpm
 EA ./image/redbrick.xpm
 
-F 255,255,1
-C 225,30,0
-
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
