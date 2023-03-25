@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:53:42 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:20:29 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,13 @@ static void	_check_extension(const char *const file_name)
 	point_pos = file_name + ft_strlen(file_name) + 1 - 5;
 	fail = ft_strncmp(point_pos, ".cub", 5);
 	if (fail)
-		exit_with_err(NOT_MATCH_EXTENSION);
+		exit_with_err(NOT_MATCH_EXTENSION, &print_err_msg);
 }
 
 static void	_set_config(t_config *const conf, t_map_data *const map_data)
 {
-	t_elem		invalid;
-
-	if (is_invalid_map_data(map_data, &invalid))
-		exit_invalid_element(invalid, map_data);
 	(void)conf;
+	(void)map_data;
 }
 
 void	set_config(char *const file_name, t_config *const conf)
@@ -88,7 +85,7 @@ void	set_config(char *const file_name, t_config *const conf)
 	_check_extension(file_name);
 	fd = open(file_name, O_RDONLY);
 	if (fd == FAIL_FD)
-		exit_with_sys_err(SYS_FILE_OPEN_FAIL);
+		exit_with_err(SYS_FILE_OPEN_FAIL, &perror);
 	set_map_data(fd, &map_data);
 	close(fd);
 	_set_config(conf, &map_data);

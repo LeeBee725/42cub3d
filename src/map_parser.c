@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:47:17 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:18:56 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_map_data(t_map_data *const data)
 	data->str_color_ceiling = NULL;
 	data->str_color_floor = NULL;
 	data->err_msg = NULL;
+	data->err_elem = MAP;
 	data->map_max_width = 0;
 	data->map_max_height = 0;
 	data->raw_map = NULL;
@@ -61,7 +62,7 @@ static void	_set_map_list(char *const line, t_map_data *data)
 	if (!cur)
 	{
 		ft_lstclear(&data->raw_map, free);
-		exit_with_sys_err(SYS_HEAP_ALLOCATE_FAIL);
+		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
 	ft_lstadd_back(&data->raw_map, cur);
 	++data->map_max_height;
@@ -76,7 +77,7 @@ static void	_set_raw_map(int fd, char *const line, t_map_data *data)
 	line[ft_strlen(line) - 1] = '\0';
 	data->raw_map = ft_lstnew(line);
 	if (!data->raw_map)
-		exit_with_sys_err(SYS_HEAP_ALLOCATE_FAIL);
+		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	data->map_max_height = 1;
 	next_line = get_next_line(fd);
 	while (!is_empty_line(next_line))

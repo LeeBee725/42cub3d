@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:25:21 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:11:07 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char *argv[])
 	t_config	conf;
 
 	if (argc < 2)
-		exit_with_err(NO_ARGUMENT);
+		exit_with_err(NO_ARGUMENT, &print_err_msg);
 	init_config(&conf);
 	set_config(argv[1], &conf);
 	free_config(&conf);

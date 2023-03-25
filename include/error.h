@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:29:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:51:54 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:16:18 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <string.h>
 
 # include "libft.h"
-# include "map_parser.h"
 
 # define NO_ERROR 0
 # define ERROR 1
@@ -31,7 +30,7 @@
 # define SYS_FILE_OPEN_FAIL "Open file failed"
 # define SYS_HEAP_ALLOCATE_FAIL "Memory allocation failed"
 
-void	exit_with_err(const char *msg);
-void	exit_with_sys_err(const char *msg);
+void	print_err_msg(const char *msg);
+void	exit_with_err(const char *msg, void (*print_err)(const char *));
 
 #endif

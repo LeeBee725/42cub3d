@@ -6,13 +6,13 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 19:47:58 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:17:00 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-int	is_invalid_map_data(t_map_data *const data, t_elem *const invalid)
+static int	is_invalid_img_ext(t_map_data *const data, t_elem *const invalid)
 {
 	t_elem	elem;
 	char	*texture_path;
@@ -31,5 +31,57 @@ int	is_invalid_map_data(t_map_data *const data, t_elem *const invalid)
 		}
 		++elem;
 	}
+	return (FALSE);
+}
+
+static int	_is_invalid_color_str(const char *color_str)
+{
+	(void)color_str;
+	return (FALSE);
+}
+
+static int	_is_invalid_color(t_map_data *const data, t_elem *const invalid)
+{
+	int	res;
+
+	res = _is_invalid_color_str(data->str_color_ceiling);
+	if (res)
+	{
+		if (res == FAIL)
+		{
+			free_map_data(data);
+			exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
+		}
+		*invalid = CEILING;
+		return (TRUE);
+	}
+	res = _is_invalid_color_str(data->str_color_floor);
+	if (res)
+	{
+		if (res == FAIL)
+		{
+			free_map_data(data);
+			exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
+		}
+		*invalid = FLOOR;
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static int	_is_invalid_raw_map(t_map_data *const data, t_elem *const invalid)
+{
+	*invalid = MAP;
+	(void)data;
+	(void)invalid;
+	return (FALSE);
+}
+
+int	is_invalid_map_data(t_map_data *const data, t_elem *const invalid)
+{
+	if (is_invalid_img_ext(data, invalid) \
+		|| _is_invalid_color(data, invalid) \
+		|| _is_invalid_raw_map(data, invalid))
+		return (TRUE);
 	return (FALSE);
 }
