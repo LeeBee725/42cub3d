@@ -6,33 +6,27 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:50:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:50:24 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:08:28 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-void	exit_invalid_element(t_elem invalid, t_map_data *const to_free)
+void	exit_invalid_elem(t_map_data *const to_free, void (*f)(const char *msg))
 {
 	static const char	*msg[7] = {
 		INVALID_EAST, INVALID_WEST, INVALID_SOUTH, INVALID_NORTH, \
 		INVALID_CEILING, INVALID_FLOOR, INVALID_MAP};
-	char				*input;
+	char				*err_msg;
 
-	input = NULL;
-	write(STDERR_FILENO, "Error\n", 6);
-	write(STDERR_FILENO, msg[invalid], ft_strlen(msg[invalid]));
-	if (EAST <= invalid && invalid <= NORTH)
-		input = to_free->texture_path[invalid];
-	else if (invalid == CEILING)
-		input = to_free->str_color_ceiling;
-	else if (invalid == FLOOR)
-		input = to_free->str_color_floor;
-	if (input)
-		write(STDERR_FILENO, input, ft_strlen(input));
-	if (to_free->err_msg)
-		write(STDERR_FILENO, to_free->err_msg, ft_strlen(to_free->err_msg));
-	write(STDERR_FILENO, "\n", 1);
+	err_msg = ft_strjoin(msg[to_free->err_elem], to_free->err_msg);
 	free_map_data(to_free);
-	exit(ERROR);
+	exit_with_err(err_msg, f);
+}
+
+void	print_dynamic_err_msg(const char *msg)
+{
+	write(STDERR_FILENO, msg, ft_strlen(msg));
+	free((void *)msg);
+	write(STDERR_FILENO, "\n", 1);
 }

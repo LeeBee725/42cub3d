@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 17:20:29 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 20:48:47 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ void	init_config(t_config *const conf)
 {
 	int	i;
 
-	conf->mlx = NULL;
 	conf->win = NULL;
 	i = 0;
 	while (i < 4)
 	{
-		conf->wall_img[i].instance = NULL;
-		conf->wall_img[i].width = 0;
-		conf->wall_img[i].height = 0;
+		conf->wall[i].image = NULL;
+		conf->wall[i].width = 0;
+		conf->wall[i].height = 0;
 		++i;
 	}
 	conf->color_ceiling.color = 0;
@@ -50,8 +49,8 @@ void	free_config(t_config *const conf)
 	i = 0;
 	while (i < 4)
 	{
-		if (conf->wall_img[i].instance)
-			mlx_destroy_image(conf->mlx, conf->wall_img[i].instance);
+		if (conf->wall[i].image)
+			mlx_destroy_image(conf->mlx, conf->wall[i].image);
 		++i;
 	}
 	if (conf->win)
@@ -72,8 +71,20 @@ static void	_check_extension(const char *const file_name)
 
 static void	_set_config(t_config *const conf, t_map_data *const map_data)
 {
-	(void)conf;
-	(void)map_data;
+	int	x;
+
+	conf->mlx = mlx_init();
+	conf->win = mlx_new_window(conf->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	set_texture(conf, map_data);
+	//TODO: Please remove after test
+	x = 0;
+	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[EAST].image, x, 0);
+	x += conf->wall[EAST].width;
+	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[WEST].image, x, 0);
+	x += conf->wall[WEST].width;
+	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[SOUTH].image, x, 0);
+	x += conf->wall[SOUTH].width;
+	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[NORTH].image, x, 0);
 }
 
 void	set_config(char *const file_name, t_config *const conf)

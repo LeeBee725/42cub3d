@@ -6,13 +6,13 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 17:17:00 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:44:25 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-static int	is_invalid_img_ext(t_map_data *const data, t_elem *const invalid)
+int	validate_img_ext(t_map_data *const data)
 {
 	t_elem	elem;
 	char	*texture_path;
@@ -25,13 +25,13 @@ static int	is_invalid_img_ext(t_map_data *const data, t_elem *const invalid)
 		point_pos = texture_path + ft_strlen(texture_path) + 1 - IMG_EXT_SIZE;
 		if (ft_strncmp(point_pos, IMG_EXT, IMG_EXT_SIZE) != 0)
 		{
-			*invalid = elem;
+			data->err_elem = elem;
 			data->err_msg = ft_strjoin(": The texture file must be ", IMG_EXT);
-			return (TRUE);
+			return (FAIL);
 		}
 		++elem;
 	}
-	return (FALSE);
+	return (SUCCESS);
 }
 
 static int	_is_invalid_color_str(const char *color_str)
@@ -79,8 +79,7 @@ static int	_is_invalid_raw_map(t_map_data *const data, t_elem *const invalid)
 
 int	is_invalid_map_data(t_map_data *const data, t_elem *const invalid)
 {
-	if (is_invalid_img_ext(data, invalid) \
-		|| _is_invalid_color(data, invalid) \
+	if (_is_invalid_color(data, invalid) \
 		|| _is_invalid_raw_map(data, invalid))
 		return (TRUE);
 	return (FALSE);

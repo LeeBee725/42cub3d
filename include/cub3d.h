@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:17:47 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:43:50 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include "error.h"
 # include "map_parser.h"
 
+# define WIN_TITLE "cub3D"
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+
+# define ON_DESTROY 17
+
 typedef struct s_trgb {
 	unsigned char	t;
 	unsigned char	r;
@@ -35,7 +41,7 @@ typedef union s_color {
 }	t_color;
 
 typedef struct s_image {
-	void	*instance;
+	void	*image;
 	int		width;
 	int		height;
 }	t_image;
@@ -43,7 +49,7 @@ typedef struct s_image {
 typedef struct s_config {
 	void			*mlx;
 	void			*win;
-	t_image			wall_img[4];
+	t_image			wall[4];
 	t_color			color_ceiling;
 	t_color			color_floor;
 	int				map_width;
@@ -51,8 +57,15 @@ typedef struct s_config {
 	char			**map;
 }	t_config;
 
+//	config.c
 void	init_config(t_config *const data);
 void	free_config(t_config *const conf);
 void	set_config(char *const file_name, t_config *const data);
+
+//	conf_error.c
+void	exit_validate_fail(t_config *const conf, t_map_data *const data);
+
+//	conf_image.c
+void	set_texture(t_config *const conf, t_map_data *const data);
 
 #endif

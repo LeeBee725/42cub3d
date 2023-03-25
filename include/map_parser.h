@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/22 20:51:59 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:08:04 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 # define TRUE 1
 # define FALSE 0
+# define SUCCESS 1
+# define FAIL -1
 
 # define IMG_EXT ".xpm"
 # define IMG_EXT_SIZE 5
@@ -45,6 +47,7 @@ typedef struct s_map_data {
 	char	*str_color_ceiling;
 	char	*str_color_floor;
 	char	*err_msg;
+	t_elem	err_elem;
 	int		map_max_width;
 	int		map_max_height;
 	t_list	*raw_map;
@@ -60,11 +63,16 @@ void	free_map_data(t_map_data *const data);
 // TODO: remove
 void	print_map_data(t_map_data data);
 
+//	map_elem.c
 void	set_element(char *line, t_elem elem, t_map_data *const data);
 t_elem	get_element_type(char *line);
+char	**get_rect_map(t_map_data *const map_data);
 
-void	exit_invalid_element(t_elem type, t_map_data *const to_free);
+//	map_error.c
+void	exit_invalid_elem(t_map_data *const data, void (*f)(const char *msg));
+void	print_dynamic_err_msg(const char *msg);
 
-int		is_invalid_map_data(t_map_data *const data, t_elem *const invalid);
+//	map_validate.c
+int		validate_img_ext(t_map_data *const data);
 
 #endif
