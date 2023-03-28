@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:19:36 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:41:45 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define INVALID_NORTH "Invaild data of NORTH wall: "
 # define INVALID_CEILING "Invaild data of color of CEILING: "
 # define INVALID_FLOOR "Invaild data of color of FLOOR: "
-# define INVALID_MAP "Invaild MAP"
+# define INVALID_MAP "Invaild MAP: "
 
 # define VALUE_IS_NULL "This value is NULL"
 # define IMG_MUST_BE ": The texture file must be "
@@ -41,6 +41,8 @@
 # define COLOR_WEIRD_ZERO ": Weird zero"
 # define COLOR_OUT_OF_RANGE ": Color value is out of range"
 # define COLOR_WRONG_NUMBERS ": Number of value is wrong"
+
+# define MAP_INVALID_CHAR ": The map has invalid character"
 
 typedef enum e_elem {
 	EAST,
@@ -93,5 +95,8 @@ int		validate_color(t_map_data *const data, const char *str, const t_elem e);
 
 //	validate_img.c
 int		validate_img_ext(t_map_data *const data);
+
+//	validate_map.c
+int		validate_map_char(t_map_data *const data);
 
 #endif

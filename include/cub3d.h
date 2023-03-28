@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 17:26:48 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:15:30 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	init_config(t_config *const data);
 void	free_config(t_config *const conf);
 void	set_config(char *const file_name, t_config *const data);
 
-//	conf_error.c
-void	exit_validate_fail(t_config *const conf, t_map_data *const data);
-
 //	conf_color.c
 void	set_color(t_config *const conf, t_map_data *const data);
 
 //	conf_image.c
 void	set_texture(t_config *const conf, t_map_data *const data);
+
+//	conf_map.c
+void	set_map(t_config *const conf, t_map_data *const data);
 
 #endif

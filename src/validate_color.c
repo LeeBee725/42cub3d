@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:18:10 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:34:04 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	validate_color_str(t_map_data *const data)
 	while (e <= FLOOR)
 	{
 		if (!data->color_str[e - CEILING])
-			return (set_err(data, CEILING, VALUE_IS_NULL));
+			return (set_err(data, e, VALUE_IS_NULL));
 		if (_validate_color_str(data, data->color_str[e - CEILING], e) == FAIL)
 			return (FAIL);
 		++e;

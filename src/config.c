@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 17:27:16 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:27:02 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	_set_config(t_config *const conf, t_map_data *const map_data)
 	conf->win = mlx_new_window(conf->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	set_texture(conf, map_data);
 	set_color(conf, map_data);
+	set_map(conf, map_data); //TODO: setting_map
 	//TODO: Please remove after test
 	x = 0;
 	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[EAST].image, x, 0);
