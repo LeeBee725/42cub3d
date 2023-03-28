@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 22:49:22 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:11:25 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,21 @@ void	free_2d(char **arr)
 		++i;
 	}
 	free(arr);
+}
+
+char	*ft_strrtrim(const char *str)
+{
+	int		i;
+	char	*trimmed;
+
+	if (!str)
+		return (NULL);
+	i = ft_strlen(str);
+	while (!str[i] || is_space(str[i]))
+		--i;
+	trimmed = (char *)malloc(sizeof(char) * (i + 1 + 1));
+	if (!trimmed)
+		return (NULL);
+	ft_strlcpy(trimmed, str, i + 1 + 1);
+	return (trimmed);
 }

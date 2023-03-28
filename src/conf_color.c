@@ -6,24 +6,44 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 22:52:40 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:16:10 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// static void	_set_color(t_color color, const t_elem e)
-// {
-	
-// }
-//TODO: set color to config.
+static int	_set_color(t_color *color, t_map_data *const data, const t_elem e)
+{
+	char	**splitted;
+
+	splitted = ft_split(data->color_str[e - CEILING], ',');
+	if (!splitted)
+		return (FAIL);
+	color->trgb.t = 0;
+	color->trgb.r = (unsigned char)ft_atoi(splitted[0]);
+	color->trgb.g = (unsigned char)ft_atoi(splitted[1]);
+	color->trgb.b = (unsigned char)ft_atoi(splitted[2]);
+	free_2d(splitted);
+	return (SUCCESS);
+}
+
 void	set_color(t_config *const conf, t_map_data *const data)
 {
+	t_elem	e;
+
 	if (validate_color_str(data) == FAIL)
 		exit_invalid_elem(data, &print_dynamic_err_msg);
-	if (validate_color(data, data->str_color_ceiling, CEILING) == FAIL)
-		exit_invalid_elem(data, &print_dynamic_err_msg);
-	if (validate_color(data, data->str_color_floor, FLOOR) == FAIL)
-		exit_invalid_elem(data, &print_dynamic_err_msg);
-	conf->color_ceiling.trgb.t = 0;
+	e = CEILING;
+	while (e <= FLOOR)
+	{
+		if (validate_color(data, data->color_str[e - CEILING], e) == FAIL)
+			exit_invalid_elem(data, &print_dynamic_err_msg);
+		if (_set_color(&conf->colors[e - CEILING], data, e) == FAIL)
+		{
+			free_map_data(data);
+			free_config(conf);
+			exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
+		}
+		++e;
+	}
 }

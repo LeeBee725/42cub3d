@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:22:07 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:11:27 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ typedef enum e_elem {
 
 typedef struct s_map_data {
 	char	*texture_path[4];
-	char	*str_color_ceiling;
-	char	*str_color_floor;
+	char	*color_str[2];
 	char	*err_msg;
 	t_elem	err_elem;
 	int		map_max_width;
@@ -67,7 +66,7 @@ void	print_map_data(t_map_data data);
 //	map_elem.c
 void	set_element(char *line, t_elem elem, t_map_data *const data);
 t_elem	get_element_type(char *line);
-char	**get_rect_map(t_map_data *const map_data);
+void	set_raw_map(int fd, char *const line, t_map_data *const data);
 
 //	map_error.c
 int		set_err(t_map_data *const d, const t_elem e, const char *msg);
@@ -80,6 +79,7 @@ void	print_dynamic_err_msg(const char *msg);
 int		is_space(const unsigned char c);
 int		is_empty_line(char *line);
 void	free_2d(char **arr);
+char	*ft_strrtrim(const char *str);
 
 //	validate_color.c
 int		validate_color_str(t_map_data *const data);

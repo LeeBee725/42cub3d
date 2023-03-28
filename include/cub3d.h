@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 20:56:44 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:26:48 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ typedef struct s_config {
 	void			*mlx;
 	void			*win;
 	t_image			wall[4];
-	t_color			color_ceiling;
-	t_color			color_floor;
+	t_color			colors[2];
 	int				map_width;
 	int				map_height;
 	char			**map;

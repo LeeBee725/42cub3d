@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:22:30 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:28:10 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ int	_validate_color_str(t_map_data *const data, const char *str, const t_elem e)
 
 int	validate_color_str(t_map_data *const data)
 {
-	if (!data->str_color_ceiling)
-		return (set_err(data, CEILING, "This value is NULL"));
-	if (!data->str_color_floor)
-		return (set_err(data, FLOOR, "This value is NULL"));
-	if (_validate_color_str(data, data->str_color_ceiling, CEILING) == FAIL)
-		return (FAIL);
-	if (_validate_color_str(data, data->str_color_floor, FLOOR) == FAIL)
-		return (FAIL);
+	t_elem	e;
+
+	e = CEILING;
+	while (e <= FLOOR)
+	{
+		if (!data->color_str[e - CEILING])
+			return (set_err(data, CEILING, "This value is NULL"));
+		if (_validate_color_str(data, data->color_str[e - CEILING], e) == FAIL)
+			return (FAIL);
+		++e;
+	}
 	return (SUCCESS);
 }
 

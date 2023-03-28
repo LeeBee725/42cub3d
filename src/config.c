@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 20:55:19 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 17:27:16 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init_config(t_config *const conf)
 		conf->wall[i].height = 0;
 		++i;
 	}
-	conf->color_ceiling.color = 0;
-	conf->color_floor.color = 0;
+	conf->colors[0].color = 0;
+	conf->colors[1].color = 0;
 	conf->map_width = 0;
 	conf->map_height = 0;
 	conf->map = NULL;
