@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:11:27 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:19:36 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@
 # define INVALID_FLOOR "Invaild data of color of FLOOR: "
 # define INVALID_MAP "Invaild MAP"
 
+# define VALUE_IS_NULL "This value is NULL"
+# define IMG_MUST_BE ": The texture file must be "
+
+# define COLOR_UNDEFINED ": Undefined character"
+# define COLOR_WRONG_NUM_OF_COMMA ": Wrong number of comma"
+# define COLOR_TOO_LONG ": String is too long"
 # define COLOR_WEIRD_ZERO ": Weird zero"
 # define COLOR_OUT_OF_RANGE ": Color value is out of range"
 # define COLOR_WRONG_NUMBERS ": Number of value is wrong"

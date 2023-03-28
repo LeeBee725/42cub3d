@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 14:22:22 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:19:41 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	validate_img_ext(t_map_data *const data)
 	{
 		texture_path = data->texture_path[elem];
 		if (!texture_path)
-			return (set_err(data, elem, "This path is NULL"));
+			return (set_err(data, elem, VALUE_IS_NULL));
 		point_pos = texture_path + ft_strlen(texture_path) + 1 - IMG_EXT_SIZE;
 		if (ft_strncmp(point_pos, IMG_EXT, IMG_EXT_SIZE) != 0)
 		{
 			data->err_elem = elem;
-			data->err_msg = ft_strjoin(": The texture file must be ", IMG_EXT);
+			data->err_msg = ft_strjoin(IMG_MUST_BE, IMG_EXT);
 			return (FAIL);
 		}
 		++elem;

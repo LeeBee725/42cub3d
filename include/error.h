@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:29:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:14:04 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:21:48 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # define FAIL_FD -1
 
+# define ERROR_STR "Error\n"
 # define NO_ARGUMENT "Argument not found"
 # define NOT_MATCH_EXTENSION "The file extension must be .cub"
 # define SYS_FILE_OPEN_FAIL "Open file failed"

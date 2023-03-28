@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:29:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:14:21 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:21:26 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	perror_dynamic_err_msg(const char *msg)
 
 void	exit_with_err(const char *msg, void (*print_err)(const char *))
 {
-	write(STDERR_FILENO, "Error\n", 6);
+	write(STDERR_FILENO, ERROR_STR, ft_strlen(ERROR_STR));
 	print_err(msg);
 	exit(ERROR);
 }

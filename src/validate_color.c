@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 17:28:10 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 19:18:10 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int	_validate_color_str(t_map_data *const data, const char *str, const t_elem e)
 	while (str[i])
 	{
 		if (str[i] != ',' && (str[i] < '0' || '9' < str[i]))
-			return (set_err_with_res(data, e, str, ": Undefined character"));
+			return (set_err_with_res(data, e, str, COLOR_UNDEFINED));
 		if (str[i] == ',')
 			++cnt;
 		++i;
 	}
 	if (cnt != 2)
-		return (set_err_with_res(data, e, str, ": Wrong number of comma"));
+		return (set_err_with_res(data, e, str, COLOR_WRONG_NUM_OF_COMMA));
 	if (i > 11)
-		return (set_err_with_res(data, e, str, ": String is too long"));
+		return (set_err_with_res(data, e, str, COLOR_TOO_LONG));
 	return (SUCCESS);
 }
 
@@ -42,7 +42,7 @@ int	validate_color_str(t_map_data *const data)
 	while (e <= FLOOR)
 	{
 		if (!data->color_str[e - CEILING])
-			return (set_err(data, CEILING, "This value is NULL"));
+			return (set_err(data, CEILING, VALUE_IS_NULL));
 		if (_validate_color_str(data, data->color_str[e - CEILING], e) == FAIL)
 			return (FAIL);
 		++e;
