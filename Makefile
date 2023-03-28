@@ -6,16 +6,16 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/25 20:56:39 by junhelee         ###   ########.fr        #
+#    Updated: 2023/03/28 14:48:56 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 SRCS_DIR:=	./src
-SRCS	:=	cub3d.c error.c config.c conf_image.c conf_color.c\
-			map_parser.c map_elem.c map_utils.c map_validate.c map_error.c
-
+SRCS	:=	$(addsuffix .c,	cub3d error config conf_image conf_color\
+							map_parser map_elem map_utils map_error\
+							validate_img validate_color)
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
 COMPILE	:=	$(CC) -g $(CFLAGS)

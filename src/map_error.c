@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:50:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 22:21:59 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:19:24 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	set_err(t_map_data *const d, const t_elem e, const char *msg)
 	return (FAIL);
 }
 
+int	set_err_with_res(t_map_data *const d, const t_elem e, \
+	const char *resource, const char *msg)
+{
+	d->err_elem = e;
+	d->err_msg = ft_strjoin(resource, msg);
+	return (FAIL);
+}
+
 void	exit_invalid_elem(t_map_data *const to_free, void (*f)(const char *msg))
 {
 	static const char	*msg[7] = {
@@ -26,12 +34,12 @@ void	exit_invalid_elem(t_map_data *const to_free, void (*f)(const char *msg))
 		INVALID_CEILING, INVALID_FLOOR, INVALID_MAP};
 	char				*err_msg;
 
-	if (f == perror)
-	{
-		free_map_data(to_free);
-		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, f);
-	}
-	err_msg = ft_strjoin(msg[to_free->err_elem], to_free->err_msg);
+	if (f == perror_dynamic_err_msg)
+		err_msg = ft_strjoin(SYS_FILE_OPEN_FAIL, to_free->err_msg);
+	else if (f == perror)
+		err_msg = SYS_HEAP_ALLOCATE_FAIL;
+	else
+		err_msg = ft_strjoin(msg[to_free->err_elem], to_free->err_msg);
 	free_map_data(to_free);
 	exit_with_err(err_msg, f);
 }

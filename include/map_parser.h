@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 22:49:20 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:22:07 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define INVALID_CEILING "Invaild data of color of CEILING: "
 # define INVALID_FLOOR "Invaild data of color of FLOOR: "
 # define INVALID_MAP "Invaild MAP"
+
+# define COLOR_WEIRD_ZERO ": Weird zero"
+# define COLOR_OUT_OF_RANGE ": Color value is out of range"
+# define COLOR_WRONG_NUMBERS ": Number of value is wrong"
 
 typedef enum e_elem {
 	EAST,
@@ -67,6 +71,8 @@ char	**get_rect_map(t_map_data *const map_data);
 
 //	map_error.c
 int		set_err(t_map_data *const d, const t_elem e, const char *msg);
+int		set_err_with_res(t_map_data *const d, const t_elem e, \
+						const char *resource, const char *msg);
 void	exit_invalid_elem(t_map_data *const data, void (*f)(const char *msg));
 void	print_dynamic_err_msg(const char *msg);
 
@@ -75,9 +81,11 @@ int		is_space(const unsigned char c);
 int		is_empty_line(char *line);
 void	free_2d(char **arr);
 
-//	map_validate.c
-int		validate_img_ext(t_map_data *const data);
+//	validate_color.c
 int		validate_color_str(t_map_data *const data);
 int		validate_color(t_map_data *const data, const char *str, const t_elem e);
+
+//	validate_img.c
+int		validate_img_ext(t_map_data *const data);
 
 #endif

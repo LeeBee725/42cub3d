@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validate.c                                     :+:      :+:    :+:   */
+/*   validate_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/25 22:52:50 by junhelee         ###   ########.fr       */
+/*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
+/*   Updated: 2023/03/28 15:22:30 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
-
-int	validate_img_ext(t_map_data *const data)
-{
-	t_elem	elem;
-	char	*texture_path;
-	char	*point_pos;
-
-	elem = EAST;
-	while (elem <= NORTH)
-	{
-		texture_path = data->texture_path[elem];
-		if (!texture_path)
-			return (set_err(data, elem, "This path is NULL"));
-		point_pos = texture_path + ft_strlen(texture_path) + 1 - IMG_EXT_SIZE;
-		if (ft_strncmp(point_pos, IMG_EXT, IMG_EXT_SIZE) != 0)
-		{
-			data->err_elem = elem;
-			data->err_msg = ft_strjoin(": The texture file must be ", IMG_EXT);
-			return (FAIL);
-		}
-		++elem;
-	}
-	return (SUCCESS);
-}
 
 int	_validate_color_str(t_map_data *const data, const char *str, const t_elem e)
 {
@@ -46,15 +22,15 @@ int	_validate_color_str(t_map_data *const data, const char *str, const t_elem e)
 	while (str[i])
 	{
 		if (str[i] != ',' && (str[i] < '0' || '9' < str[i]))
-			return (set_err(data, e, "Undefined character"));
+			return (set_err_with_res(data, e, str, ": Undefined character"));
 		if (str[i] == ',')
 			++cnt;
 		++i;
 	}
 	if (cnt != 2)
-		return (set_err(data, e, "Wrong number of comma"));
+		return (set_err_with_res(data, e, str, ": Wrong number of comma"));
 	if (i > 11)
-		return (set_err(data, e, "String is too long"));
+		return (set_err_with_res(data, e, str, ": String is too long"));
 	return (SUCCESS);
 }
 
@@ -71,12 +47,20 @@ int	validate_color_str(t_map_data *const data)
 	return (SUCCESS);
 }
 
-//TODO: Norm
+static int	_validate_out_of_range(const int val, char **to_free)
+{
+	if (val < 0 || 255 < val)
+	{
+		free_2d(to_free);
+		return (FAIL);
+	}
+	return (SUCCESS);
+}
+
 int	validate_color(t_map_data *const data, const char *str, const t_elem e)
 {
 	char	**splitted;
 	int		i;
-	int		val;
 
 	splitted = ft_split(str, ',');
 	if (!splitted)
@@ -87,21 +71,14 @@ int	validate_color(t_map_data *const data, const char *str, const t_elem e)
 		if (splitted[i][0] == '0' && splitted[i][1] != '\0')
 		{
 			free_2d(splitted);
-			return (set_err(data, e, "Weird zero"));
+			return (set_err_with_res(data, e, str, COLOR_WEIRD_ZERO));
 		}
-		val = ft_atoi(splitted[i]);
-		if (val < 0 || 255 < val)
-		{
-			free_2d(splitted);
-			return (set_err(data, e, "Color value is out of range"));
-		}
+		if (_validate_out_of_range(ft_atoi(splitted[i]), splitted) == FAIL)
+			return (set_err_with_res(data, e, str, COLOR_OUT_OF_RANGE));
 		++i;
 	}
-	if (i != 3)
-	{
-		free_2d(splitted);
-		return (set_err(data, e, "Number of value is wrong"));
-	}
 	free_2d(splitted);
+	if (i != 3)
+		return (set_err_with_res(data, e, str, COLOR_WRONG_NUMBERS));
 	return (SUCCESS);
 }

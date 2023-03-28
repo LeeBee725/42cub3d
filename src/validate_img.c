@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conf_image.c                                       :+:      :+:    :+:   */
+/*   validate_img.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:19:47 by junhelee         ###   ########.fr       */
+/*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
+/*   Updated: 2023/03/28 14:22:22 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "map_parser.h"
 
-void	set_texture(t_config *const conf, t_map_data *const data)
+int	validate_img_ext(t_map_data *const data)
 {
 	t_elem	elem;
+	char	*texture_path;
+	char	*point_pos;
 
-	if (validate_img_ext(data) == FAIL)
-		exit_invalid_elem(data, &print_dynamic_err_msg);
 	elem = EAST;
 	while (elem <= NORTH)
 	{
-		conf->wall[elem].image = mlx_xpm_file_to_image(\
-				conf->mlx, data->texture_path[elem], \
-				&conf->wall[elem].width, &conf->wall[elem].height);
-		if (!conf->wall[elem].image)
+		texture_path = data->texture_path[elem];
+		if (!texture_path)
+			return (set_err(data, elem, "This path is NULL"));
+		point_pos = texture_path + ft_strlen(texture_path) + 1 - IMG_EXT_SIZE;
+		if (ft_strncmp(point_pos, IMG_EXT, IMG_EXT_SIZE) != 0)
 		{
-			free_config(conf);
 			data->err_elem = elem;
-			data->err_msg = ft_strjoin(": ", data->texture_path[elem]);
-			exit_invalid_elem(data, &perror_dynamic_err_msg);
+			data->err_msg = ft_strjoin(": The texture file must be ", IMG_EXT);
+			return (FAIL);
 		}
 		++elem;
 	}
+	return (SUCCESS);
 }
