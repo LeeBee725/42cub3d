@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 18:51:46 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:25:10 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	print_map_data(t_map_data data)
 	printf("MAP_HEIGHT : %d\n", data.map_max_height);
 	if (!data.raw_map)
 	{
-		printf("MAP : %s\n", (char *)data.raw_map);
+		printf("MAP : %s\n", "(null)");
 		return ;
 	}
 	printf("MAP :\n");
