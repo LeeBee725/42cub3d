@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 17:40:03 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 23:30:00 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 
 # define MAP_HAS_EMPTY_LINE ": There are empty lines in the map"
 # define MAP_INVALID_CHAR ": The map has invalid character"
+# define MAP_NOT_ONLY_ONE ": The map must have ONLY one player"
 # define MAP_NOT_SURROUNDED_WALL ": The map must be closed/surrounded by walls"
 
 typedef enum e_elem {
@@ -102,5 +103,6 @@ int		validate_img_ext(t_map_data *const data);
 //	validate_map.c
 int		validate_map_has_empty_line(t_map_data *const data);
 int		validate_map_char(t_map_data *const data);
+int		validate_map_only_one_player(t_map_data *const data);
 
 #endif

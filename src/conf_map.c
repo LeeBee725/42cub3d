@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 22:09:57 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 23:30:32 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	_print_map(t_config *const conf); // TODO: remove after test
 void	set_map(t_config *const conf, t_map_data *const data)
 {
 	if (validate_map_has_empty_line(data) == FAIL \
-		|| validate_map_char(data) == FAIL)
+		|| validate_map_char(data) == FAIL \
+		|| validate_map_only_one_player(data) == FAIL)
 	{
 		free_config(conf);
 		exit_invalid_elem(data, &print_dynamic_err_msg);
