@@ -4,7 +4,7 @@ WE ./image/eagle.xpm
 EA      ./image/redbrick.xpm
 
 F 25,10,100
-C 225,30,1
+C 225,3,111
 
 
         1111111111111111111111111

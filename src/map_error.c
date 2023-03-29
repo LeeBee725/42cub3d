@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:50:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:19:24 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 23:10:13 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ int	set_err(t_map_data *const d, const t_elem e, const char *msg)
 int	set_err_with_res(t_map_data *const d, const t_elem e, \
 	const char *resource, const char *msg)
 {
+	char	*temp;
+
 	d->err_elem = e;
-	d->err_msg = ft_strjoin(resource, msg);
+	temp = ft_strjoin(": ", resource);
+	d->err_msg = ft_strjoin(temp, msg);
+	free(temp);
 	return (FAIL);
 }
 
