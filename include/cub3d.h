@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:15:30 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 23:03:39 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ typedef struct s_config {
 	char			**map;
 }	t_config;
 
-//	config.c
-void	init_config(t_config *const data);
-void	free_config(t_config *const conf);
-void	set_config(char *const file_name, t_config *const data);
+//	check_map.c
+int		validate_map_surrounded_wall(t_config *const conf);
 
 //	conf_color.c
 void	set_color(t_config *const conf, t_map_data *const data);
@@ -69,5 +67,10 @@ void	set_texture(t_config *const conf, t_map_data *const data);
 
 //	conf_map.c
 void	set_map(t_config *const conf, t_map_data *const data);
+
+//	config.c
+void	init_config(t_config *const data);
+void	free_config(t_config *const conf);
+void	set_config(char *const file_name, t_config *const data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 22:09:31 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:09:57 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ void	set_map(t_config *const conf, t_map_data *const data)
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
 	_print_map(conf);
+	if (validate_map_surrounded_wall(conf) == FAIL)
+	{
+		free_config(conf);
+		data->err_elem = MAP;
+		data->err_msg = ft_strdup(MAP_NOT_SURROUNDED_WALL);
+		exit_invalid_elem(data, &print_dynamic_err_msg);
+	}
 }
 
 #include <stdio.h> //TODO: remove after test

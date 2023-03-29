@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 15:44:13 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:40:03 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define FALSE 0
 # define SUCCESS 1
 # define FAIL -1
+# define MALLOC_FAIL -2
 
 # define IMG_EXT ".xpm"
 # define IMG_EXT_SIZE 5
@@ -44,6 +45,7 @@
 
 # define MAP_HAS_EMPTY_LINE ": There are empty lines in the map"
 # define MAP_INVALID_CHAR ": The map has invalid character"
+# define MAP_NOT_SURROUNDED_WALL ": The map must be closed/surrounded by walls"
 
 typedef enum e_elem {
 	EAST,

@@ -6,10 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:24:35 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 15:41:55 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 23:01:56 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "map_parser.h"
 
 static int	_is_valid_char(char c)
