@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 16:54:18 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 22:09:31 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	_set_map(t_config *const conf, t_map_data *const data)
 {
 	int		i;
 	t_list	*cur;
-	char	*line;
 
 	conf->map_width = data->map_max_width;
 	conf->map_height = data->map_max_height;
@@ -28,13 +27,14 @@ static int	_set_map(t_config *const conf, t_map_data *const data)
 	cur = data->raw_map;
 	while (cur && i < conf->map_height)
 	{
-		line = (char *)cur->content;
-		conf->map[i] = (char *)malloc(sizeof(char) * (conf->map_width + 1));
+		conf->map[i] = (char *)ft_calloc(conf->map_width + 1, sizeof(char));
 		if (!conf->map[i])
 			return (FAIL);
-		ft_memset(conf->map[i], ' ', sizeof(char) * (conf->map_width + 1));
-		conf->map[i][conf->map_width] = '\0';
-		ft_strlcpy(conf->map[i], line, ft_strlen(line));
+		ft_memset(conf->map[i], ' ', sizeof(char) * conf->map_width);
+		ft_strlcpy(conf->map[i], (char *)cur->content, \
+			ft_strlen((char *)cur->content) + 1);
+		if ((size_t)conf->map_width != ft_strlen((char *)cur->content))
+			conf->map[i][ft_strlen((char *)cur->content)] = ' ';
 		cur = cur->next;
 		++i;
 	}
@@ -43,7 +43,6 @@ static int	_set_map(t_config *const conf, t_map_data *const data)
 
 static void	_print_map(t_config *const conf); // TODO: remove after test
 
-//TODO: setting map
 void	set_map(t_config *const conf, t_map_data *const data)
 {
 	if (validate_map_has_empty_line(data) == FAIL \
@@ -74,9 +73,23 @@ static void	_print_map(t_config *const conf) // TODO: remove after test
 	}
 	printf("Map:\n");
 	i = 0;
-	while (conf->map[i])
+	while (i < conf->map_width + 2)
 	{
-		printf("%s\n", conf->map[i]);
+		printf("#");
 		++i;
 	}
+	printf("\n");
+	i = 0;
+	while (conf->map[i])
+	{
+		printf("#%s#\n", conf->map[i]);
+		++i;
+	}
+	i = 0;
+	while (i < conf->map_width + 2)
+	{
+		printf("#");
+		++i;
+	}
+	printf("\n");
 }
