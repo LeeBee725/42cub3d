@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:41:45 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:44:13 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # define IMG_EXT ".xpm"
 # define IMG_EXT_SIZE 5
 
-# define INVALID_EAST "Invaild data of EAST wall: "
-# define INVALID_WEST "Invaild data of WEST wall: "
-# define INVALID_SOUTH "Invaild data of SOUTH wall: "
-# define INVALID_NORTH "Invaild data of NORTH wall: "
-# define INVALID_CEILING "Invaild data of color of CEILING: "
-# define INVALID_FLOOR "Invaild data of color of FLOOR: "
-# define INVALID_MAP "Invaild MAP: "
+# define INVALID_EAST "Invaild data of EAST wall"
+# define INVALID_WEST "Invaild data of WEST wall"
+# define INVALID_SOUTH "Invaild data of SOUTH wall"
+# define INVALID_NORTH "Invaild data of NORTH wall"
+# define INVALID_CEILING "Invaild data of color of CEILING"
+# define INVALID_FLOOR "Invaild data of color of FLOOR"
+# define INVALID_MAP "Invaild MAP"
 
-# define VALUE_IS_NULL "This value is NULL"
+# define VALUE_IS_NULL ": This value is NULL"
 # define IMG_MUST_BE ": The texture file must be "
 
 # define COLOR_UNDEFINED ": Undefined character"
@@ -42,6 +42,7 @@
 # define COLOR_OUT_OF_RANGE ": Color value is out of range"
 # define COLOR_WRONG_NUMBERS ": Number of value is wrong"
 
+# define MAP_HAS_EMPTY_LINE ": There are empty lines in the map"
 # define MAP_INVALID_CHAR ": The map has invalid character"
 
 typedef enum e_elem {
@@ -97,6 +98,7 @@ int		validate_color(t_map_data *const data, const char *str, const t_elem e);
 int		validate_img_ext(t_map_data *const data);
 
 //	validate_map.c
+int		validate_map_has_empty_line(t_map_data *const data);
 int		validate_map_char(t_map_data *const data);
 
 #endif

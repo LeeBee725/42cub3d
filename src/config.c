@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:27:02 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:00:03 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,7 @@ void	free_config(t_config *const conf)
 
 	i = 0;
 	if (conf->map)
-	{
-		while (conf->map[i])
-		{
-			free(conf->map[i]);
-			++i;
-		}
-		free(conf->map);
-	}
+		free_2d(conf->map);
 	i = 0;
 	while (i < 4)
 	{

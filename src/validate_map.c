@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:24:35 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:40:41 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:41:55 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ static int	_is_valid_char(char c)
 	return (FALSE);
 }
 
-//TODO: check that the map has valid characters.
+int	validate_map_has_empty_line(t_map_data *const data)
+{
+	if (data->err_msg && \
+	ft_strncmp(data->err_msg, MAP_INVALID_CHAR, ft_strlen(data->err_msg) + 1))
+		return (set_err(data, MAP, MAP_HAS_EMPTY_LINE));
+	return (SUCCESS);
+}
+
 int	validate_map_char(t_map_data *const data)
 {
 	t_list	*cur;

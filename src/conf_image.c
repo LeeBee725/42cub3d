@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 15:19:47 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:44:01 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	set_texture(t_config *const conf, t_map_data *const data)
 	t_elem	elem;
 
 	if (validate_img_ext(data) == FAIL)
+	{
+		free_config(conf);
 		exit_invalid_elem(data, &print_dynamic_err_msg);
+	}
 	elem = EAST;
 	while (elem <= NORTH)
 	{

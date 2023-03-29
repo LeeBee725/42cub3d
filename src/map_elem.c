@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:18:33 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:10:55 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:32:06 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,9 @@ void	set_raw_map(int fd, char *const line, t_map_data *const data)
 		next_line = get_next_line(fd);
 	}
 	if (next_line && is_empty_line(next_line))
+	{
 		free(next_line);
+		data->err_elem = MAP;
+		data->err_msg = "There are empty lines in the map";
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 17:16:10 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:44:37 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@ void	set_color(t_config *const conf, t_map_data *const data)
 	t_elem	e;
 
 	if (validate_color_str(data) == FAIL)
+	{
+		free_config(conf);
 		exit_invalid_elem(data, &print_dynamic_err_msg);
+	}
 	e = CEILING;
 	while (e <= FLOOR)
 	{
 		if (validate_color(data, data->color_str[e - CEILING], e) == FAIL)
+		{
+			free_config(conf);
 			exit_invalid_elem(data, &print_dynamic_err_msg);
+		}
 		if (_set_color(&conf->colors[e - CEILING], data, e) == FAIL)
 		{
 			free_map_data(data);
