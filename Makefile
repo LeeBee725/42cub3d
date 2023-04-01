@@ -6,7 +6,7 @@
 #    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 14:40:18 by sryou            ###   ########.fr        #
+#    Updated: 2023/04/01 14:41:51 by sryou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,10 @@ clean:
 	@$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJS)
 
-fclean: clean
+fclean: 
+	@$(MAKE) -C $(LIBFT) fclean
+	@$(MAKE) -C $(MLX_DIR) clean
+	$(RM) $(OBJS)
 	$(RM) $(NAME)
 
 re:
