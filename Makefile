@@ -6,7 +6,7 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/03/29 23:04:00 by junhelee         ###   ########.fr        #
+#    Updated: 2023/04/01 14:10:36 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME	:=	cub3D
 SRCS_DIR:=	./src
 SRCS	:=	$(addsuffix .c,	cub3d error config conf_image conf_color conf_map\
 							map_parser map_elem map_utils map_error\
-							validate_img validate_color validate_map check_map)
+							validate_img validate_color validate_map check_map\
+							ft_mlx calculate draw render move)
+
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
 COMPILE	:=	$(CC) -g $(CFLAGS)

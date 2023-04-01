@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 16:44:37 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:09:34 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	_set_color(t_color *color, t_map_data *const data, const t_elem e)
 	return (SUCCESS);
 }
 
-void	set_color(t_config *const conf, t_map_data *const data)
+void	set_color(t_data *const conf, t_map_data *const data)
 {
 	t_elem	e;
 

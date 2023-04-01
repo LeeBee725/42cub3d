@@ -6,13 +6,13 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 18:38:04 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:19:17 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_config(t_config *const conf)
+void	init_data(t_data *const conf)
 {
 	int	i;
 
@@ -29,16 +29,16 @@ void	init_config(t_config *const conf)
 	conf->colors[1].color = 0;
 	conf->map_width = 0;
 	conf->map_height = 0;
-	conf->map = NULL;
+	conf->char_map = NULL;
 }
 
-void	free_config(t_config *const conf)
+void	free_config(t_data *const conf)
 {
 	int	i;
 
 	i = 0;
-	if (conf->map)
-		free_2d(conf->map);
+	if (conf->char_map)
+		free_2d(conf->char_map);
 	i = 0;
 	while (i < 4)
 	{
@@ -48,7 +48,7 @@ void	free_config(t_config *const conf)
 	}
 	if (conf->win)
 		mlx_destroy_window(conf->mlx, conf->win);
-	init_config(conf);
+	init_data(conf);
 }
 
 static void	_check_extension(const char *const file_name)
@@ -62,12 +62,14 @@ static void	_check_extension(const char *const file_name)
 		exit_with_err(NOT_MATCH_EXTENSION, &print_err_msg);
 }
 
-static void	_set_config(t_config *const conf, t_map_data *const map_data)
+static void	_set_data(t_data *const conf, t_map_data *const map_data)
 {
 	int	x;
 
 	conf->mlx = mlx_init();
-	conf->win = mlx_new_window(conf->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	conf->win = mlx_new_window(conf->mlx, WIDTH, HEIGHT, WIN_TITLE);
+	conf->img = malloc(sizeof(t_img));
+	make_image(conf);
 	set_texture(conf, map_data);
 	set_color(conf, map_data);
 	set_map(conf, map_data);
@@ -82,7 +84,7 @@ static void	_set_config(t_config *const conf, t_map_data *const map_data)
 	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[NORTH].image, x, 0);
 }
 
-void	set_config(char *const file_name, t_config *const conf)
+void	set_data(char *const file_name, t_data *const conf)
 {
 	int			fd;
 	t_map_data	map_data;
@@ -94,6 +96,6 @@ void	set_config(char *const file_name, t_config *const conf)
 		exit_with_err(SYS_FILE_OPEN_FAIL, &perror);
 	set_map_data(fd, &map_data);
 	close(fd);
-	_set_config(conf, &map_data);
+	_set_data(conf, &map_data);
 	free_map_data(&map_data);
 }

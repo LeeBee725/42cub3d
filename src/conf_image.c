@@ -6,13 +6,13 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 16:44:01 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:09:34 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_texture(t_config *const conf, t_map_data *const data)
+void	set_texture(t_data *const conf, t_map_data *const data)
 {
 	t_elem	elem;
 

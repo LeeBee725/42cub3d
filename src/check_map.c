@@ -6,21 +6,21 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 23:01:34 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 13:43:53 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:19:17 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	_check(t_config *const conf, char ***v, const int r, const int c)
+static int	_check(t_data *const conf, char ***v, const int r, const int c)
 {
 	const int	dx[4] = {1, -1, 0, 0};
 	const int	dy[4] = {0, 0, 1, -1};
 	int			i;
 
-	if (conf->map[r][c] == ' ')
+	if (conf->char_map[r][c] == ' ')
 		return (FAIL);
-	if (conf->map[r][c] == '1')
+	if (conf->char_map[r][c] == '1')
 		return (SUCCESS);
 	(*v)[r][c] = '1';
 	i = 0;
@@ -38,7 +38,7 @@ static int	_check(t_config *const conf, char ***v, const int r, const int c)
 	return (SUCCESS);
 }
 
-static int	_check_all_path(t_config *const conf, char ***visitted)
+static int	_check_all_path(t_data *const conf, char ***visitted)
 {
 	int	r;
 	int	c;
@@ -49,9 +49,9 @@ static int	_check_all_path(t_config *const conf, char ***visitted)
 		c = 0;
 		while (c < conf->map_width)
 		{
-			if ((*visitted)[r][c] == '0' && (conf->map[r][c] == '0' \
-				|| conf->map[r][c] == 'E' || conf->map[r][c] == 'W' \
-				|| conf->map[r][c] == 'S' || conf->map[r][c] == 'N'))
+			if ((*visitted)[r][c] == '0' && (conf->char_map[r][c] == '0' \
+				|| conf->char_map[r][c] == 'E' || conf->char_map[r][c] == 'W' \
+				|| conf->char_map[r][c] == 'S' || conf->char_map[r][c] == 'N'))
 				if (_check(conf, visitted, r, c) == FAIL)
 					return (FAIL);
 			++c;
@@ -86,7 +86,7 @@ static char	**_create_visitted_map(const int h, const int w)
 	return (visitted);
 }
 
-int	validate_map_surrounded_wall(t_config *const conf)
+int	validate_map_surrounded_wall(t_data *const conf)
 {
 	char	**visitted;
 
