@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:47:31 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:47:56 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*ft_strrtrim(const char *str);
 
 //	validate_color.c
 int		validate_color_str(t_map_conf *const map_conf);
-int		validate_color(t_map_conf *const map_conf, const char *str, const t_elem e);
+int		validate_color(t_map_conf *const map_conf, const char *str, t_elem e);
 
 //	validate_img.c
 int		validate_img_ext(t_map_conf *const conf);

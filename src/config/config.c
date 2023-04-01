@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:44:42 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 16:06:18 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ void	init_conf(t_conf *const conf)
 	i = 0;
 	while (i < 4)
 	{
-		conf->wall[i].image = NULL;
-		conf->wall[i].width = 0;
-		conf->wall[i].height = 0;
+		init_img(&conf->wall[i]);
 		++i;
 	}
 	conf->colors[0].color = 0;
 	conf->colors[1].color = 0;
+	conf->img = NULL;
 	conf->map_width = 0;
 	conf->map_height = 0;
 	conf->move_speed = 0.08;
@@ -43,14 +42,25 @@ void	free_config(t_conf *const conf)
 {
 	int	i;
 
-	i = 0;
+	if (conf->map)
+	{
+		i = 0;
+		while (i < conf->map_height)
+		{
+			free(conf->map[i]);
+			++i;
+		}
+		free(conf->map);
+	}
 	if (conf->char_map)
 		free_2d(conf->char_map);
+	if (conf->img)
+		free_img(conf->mlx, conf->img);
+	free(conf->img);
 	i = 0;
 	while (i < 4)
 	{
-		if (conf->wall[i].image)
-			mlx_destroy_image(conf->mlx, conf->wall[i].image);
+		free_img(conf->mlx, &conf->wall[i]);
 		++i;
 	}
 	if (conf->win)
