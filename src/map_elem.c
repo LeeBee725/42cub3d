@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:18:33 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 15:32:06 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:55:43 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static void	_set_map_list(char *const line, t_map_data *data)
 	}
 	ft_lstadd_back(&data->raw_map, cur);
 	++data->map_max_height;
-	if (data->map_max_width < len - 1)
-		data->map_max_width = len - 1;
+	if (data->map_max_width < len)
+		data->map_max_width = len;
 	free(line);
 }
 
