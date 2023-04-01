@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 16:57:52 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 13:54:09 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ void	make_ray(t_data *data, t_ray *ray, int x)
 	ray->delta_distance_y = fabs(1 / ray->ray_y);
 }
 
+void	calculate_distance(t_ray *ray)
+{
+	double	distance;
+	
+	if (ray->grid == X_DIRECTION)
+		distance = (ray->distance_x - ray->delta_distance_x);
+	else
+		distance = (ray->distance_y - ray->delta_distance_y);
+	ray->distance = distance;
+}
+
 void	calculate_ray(t_data *data, t_ray *ray, int x)
 {
 	int	hit;
@@ -87,11 +98,23 @@ void	calculate(t_data *data)
 	t_ray	ray;
 	int		x;
 
+	draw_map_3d(data);
 	x = 0;
 	while (x < WIDTH)
 	{
 		calculate_ray(data, &ray, x);
-		draw_ray_2d(data, &ray);
+		calculate_distance(&ray);
+		draw_object_3d(data, &ray, WIDTH - x - 1);
+		x++;
+	}
+	draw_map_2d(data);
+	x = 0;
+	while (x < WIDTH)
+	{
+		calculate_ray(data, &ray, x);
+		calculate_distance(&ray);
+		if (x % 10 == 0)
+			draw_ray_2d(data, &ray);
 		x++;
 	}
 }

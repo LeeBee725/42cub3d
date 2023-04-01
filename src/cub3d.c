@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 17:13:40 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 13:50:10 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 int	loop(t_data *data)
 {
-	draw_map_2d(data);
-	printf("draw map\n");
 	calculate(data);
-	printf("calculate distance\n");
 	render(data);
-	printf("render rays\n");
 	return (0);
 }
 

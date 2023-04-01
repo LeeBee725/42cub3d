@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 16:57:23 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:01:49 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define REC_WIDTH 80
-# define REC_HEIGHT 80
+# define REC_WIDTH 20
+# define REC_HEIGHT 20
 # define X_DIRECTION 0
 # define Y_DIRECTION 1
 # define TRUE 1
 # define FALSE 0
+# define RED 0x00FF0000
+# define YELLOW 0x00FFFF00
+# define BLUE 0x000000FF
 # define KEY_PRESS 2
 # define KEY_EXIT 17
 # define KEY_A 0
@@ -89,6 +92,7 @@ typedef struct s_ray
 	double	user_y;
 	int		map_x;
 	int		map_y;
+	double	distance;
 	double	distance_x;
 	double	distance_y;
 	double	delta_distance_x;
@@ -107,6 +111,8 @@ void	rotate(t_data *data, int clockwise);
 
 void	draw_map_2d(t_data *data);
 void	draw_ray_2d(t_data *data, t_ray *ray);
+void	draw_map_3d(t_data *data);
+void	draw_object_3d(t_data *data, t_ray *ray, int x);
 
 void	calculate(t_data *data);
 void	render(t_data *data);
