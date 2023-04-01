@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_elem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:18:33 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 13:55:43 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-void	set_element(char *line, t_elem elem, t_map_data *const data)
+void	set_element(char *line, t_elem elem, t_map_conf *const conf)
 {
 	int		i;
 
@@ -21,21 +21,21 @@ void	set_element(char *line, t_elem elem, t_map_data *const data)
 		++i;
 	if (CEILING <= elem && elem <= FLOOR)
 	{
-		if (data->color_str[elem - CEILING])
+		if (conf->color_str[elem - CEILING])
 		{
-			free(data->color_str[elem - CEILING]);
-			data->color_str[elem - CEILING] = NULL;
+			free(conf->color_str[elem - CEILING]);
+			conf->color_str[elem - CEILING] = NULL;
 		}
-		data->color_str[elem - CEILING] = ft_strrtrim(line + i);
+		conf->color_str[elem - CEILING] = ft_strrtrim(line + i);
 	}
 	else if (EAST <= elem && elem <= NORTH)
 	{
-		if (data->texture_path[elem])
+		if (conf->texture_path[elem])
 		{
-			free(data->texture_path[elem]);
-			data->texture_path[elem] = NULL;
+			free(conf->texture_path[elem]);
+			conf->texture_path[elem] = NULL;
 		}
-		data->texture_path[elem] = ft_strrtrim(line + i);
+		conf->texture_path[elem] = ft_strrtrim(line + i);
 	}
 }
 
@@ -54,7 +54,7 @@ t_elem	get_element_type(char *line)
 	return (MAP);
 }
 
-static void	_set_map_list(char *const line, t_map_data *data)
+static void	_set_map_list(char *const line, t_map_conf *conf)
 {
 	t_list	*cur;
 	int		len;
@@ -65,7 +65,7 @@ static void	_set_map_list(char *const line, t_map_data *data)
 	if (!trimmed)
 	{
 		free(line);
-		ft_lstclear(&data->raw_map, free);
+		ft_lstclear(&conf->raw_map, free);
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
 	len = ft_strlen(trimmed);
@@ -73,17 +73,17 @@ static void	_set_map_list(char *const line, t_map_data *data)
 	if (!cur)
 	{
 		free(line);
-		ft_lstclear(&data->raw_map, free);
+		ft_lstclear(&conf->raw_map, free);
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
-	ft_lstadd_back(&data->raw_map, cur);
-	++data->map_max_height;
-	if (data->map_max_width < len)
-		data->map_max_width = len;
+	ft_lstadd_back(&conf->raw_map, cur);
+	++conf->map_max_height;
+	if (conf->map_max_width < len)
+		conf->map_max_width = len;
 	free(line);
 }
 
-static void	_set_first_line(char *const first, t_map_data *const data)
+static void	_set_first_line(char *const first, t_map_conf *const conf)
 {
 	char	*trimmed;
 
@@ -93,35 +93,35 @@ static void	_set_first_line(char *const first, t_map_data *const data)
 	free(first);
 	if (!trimmed)
 	{
-		free_map_data(data);
+		free_map_conf(conf);
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
-	data->map_max_width = ft_strlen(trimmed);
-	data->raw_map = ft_lstnew(trimmed);
-	if (!data->raw_map)
+	conf->map_max_width = ft_strlen(trimmed);
+	conf->raw_map = ft_lstnew(trimmed);
+	if (!conf->raw_map)
 	{
 		free(trimmed);
-		free_map_data(data);
+		free_map_conf(conf);
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
-	data->map_max_height = 1;
+	conf->map_max_height = 1;
 }
 
-void	set_raw_map(int fd, char *const line, t_map_data *const data)
+void	set_raw_map(int fd, char *const line, t_map_conf *const conf)
 {
 	char	*next_line;
 
-	_set_first_line(line, data);
+	_set_first_line(line, conf);
 	next_line = get_next_line(fd);
 	while (!is_empty_line(next_line))
 	{
-		_set_map_list(next_line, data);
+		_set_map_list(next_line, conf);
 		next_line = get_next_line(fd);
 	}
 	if (next_line && is_empty_line(next_line))
 	{
 		free(next_line);
-		data->err_elem = MAP;
-		data->err_msg = "There are empty lines in the map";
+		conf->err_elem = MAP;
+		conf->err_msg = "There are empty lines in the map";
 	}
 }

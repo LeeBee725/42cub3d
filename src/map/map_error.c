@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:50:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 23:10:13 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-int	set_err(t_map_data *const d, const t_elem e, const char *msg)
+int	set_err(t_map_conf *const d, const t_elem e, const char *msg)
 {
 	d->err_elem = e;
 	d->err_msg = ft_strdup(msg);
 	return (FAIL);
 }
 
-int	set_err_with_res(t_map_data *const d, const t_elem e, \
+int	set_err_with_res(t_map_conf *const d, const t_elem e, \
 	const char *resource, const char *msg)
 {
 	char	*temp;
@@ -31,7 +31,7 @@ int	set_err_with_res(t_map_data *const d, const t_elem e, \
 	return (FAIL);
 }
 
-void	exit_invalid_elem(t_map_data *const to_free, void (*f)(const char *msg))
+void	exit_invalid_elem(t_map_conf *const to_free, void (*f)(const char *msg))
 {
 	static const char	*msg[7] = {
 		INVALID_EAST, INVALID_WEST, INVALID_SOUTH, INVALID_NORTH, \
@@ -44,7 +44,7 @@ void	exit_invalid_elem(t_map_data *const to_free, void (*f)(const char *msg))
 		err_msg = SYS_HEAP_ALLOCATE_FAIL;
 	else
 		err_msg = ft_strjoin(msg[to_free->err_elem], to_free->err_msg);
-	free_map_data(to_free);
+	free_map_conf(to_free);
 	exit_with_err(err_msg, f);
 }
 

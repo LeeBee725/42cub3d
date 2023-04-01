@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   validate_img.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/28 19:19:41 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-int	validate_img_ext(t_map_data *const data)
+int	validate_img_ext(t_map_conf *const conf)
 {
 	t_elem	elem;
 	char	*texture_path;
@@ -21,14 +21,14 @@ int	validate_img_ext(t_map_data *const data)
 	elem = EAST;
 	while (elem <= NORTH)
 	{
-		texture_path = data->texture_path[elem];
+		texture_path = conf->texture_path[elem];
 		if (!texture_path)
-			return (set_err(data, elem, VALUE_IS_NULL));
+			return (set_err(conf, elem, VALUE_IS_NULL));
 		point_pos = texture_path + ft_strlen(texture_path) + 1 - IMG_EXT_SIZE;
 		if (ft_strncmp(point_pos, IMG_EXT, IMG_EXT_SIZE) != 0)
 		{
-			data->err_elem = elem;
-			data->err_msg = ft_strjoin(IMG_MUST_BE, IMG_EXT);
+			conf->err_elem = elem;
+			conf->err_msg = ft_strjoin(IMG_MUST_BE, IMG_EXT);
 			return (FAIL);
 		}
 		++elem;

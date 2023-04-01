@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 23:30:00 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:47:31 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 # define IMG_EXT ".xpm"
 # define IMG_EXT_SIZE 5
 
-# define INVALID_EAST "Invaild data of EAST wall"
-# define INVALID_WEST "Invaild data of WEST wall"
-# define INVALID_SOUTH "Invaild data of SOUTH wall"
-# define INVALID_NORTH "Invaild data of NORTH wall"
-# define INVALID_CEILING "Invaild data of color of CEILING"
-# define INVALID_FLOOR "Invaild data of color of FLOOR"
+# define INVALID_EAST "Invaild conf of EAST wall"
+# define INVALID_WEST "Invaild conf of WEST wall"
+# define INVALID_SOUTH "Invaild conf of SOUTH wall"
+# define INVALID_NORTH "Invaild conf of NORTH wall"
+# define INVALID_CEILING "Invaild conf of color of CEILING"
+# define INVALID_FLOOR "Invaild conf of color of FLOOR"
 # define INVALID_MAP "Invaild MAP"
 
 # define VALUE_IS_NULL ": This value is NULL"
@@ -58,7 +58,7 @@ typedef enum e_elem {
 	MAP
 }	t_elem;
 
-typedef struct s_map_data {
+typedef struct s_map_conf {
 	char	*texture_path[4];
 	char	*color_str[2];
 	char	*err_msg;
@@ -66,25 +66,25 @@ typedef struct s_map_data {
 	int		map_max_width;
 	int		map_max_height;
 	t_list	*raw_map;
-}	t_map_data;
+}	t_map_conf;
 
-void	init_map_data(t_map_data *const data);
-void	set_map_data(int fd, t_map_data *const data);
-void	free_map_data(t_map_data *const data);
+void	init_map_conf(t_map_conf *const conf);
+void	set_map_conf(int fd, t_map_conf *const conf);
+void	free_map_conf(t_map_conf *const conf);
 
 // TODO: remove
-void	print_map_data(t_map_data data);
+void	print_map_conf(t_map_conf conf);
 
 //	map_elem.c
-void	set_element(char *line, t_elem elem, t_map_data *const data);
+void	set_element(char *line, t_elem elem, t_map_conf *const conf);
 t_elem	get_element_type(char *line);
-void	set_raw_map(int fd, char *const line, t_map_data *const data);
+void	set_raw_map(int fd, char *const line, t_map_conf *const conf);
 
 //	map_error.c
-int		set_err(t_map_data *const d, const t_elem e, const char *msg);
-int		set_err_with_res(t_map_data *const d, const t_elem e, \
+int		set_err(t_map_conf *const d, const t_elem e, const char *msg);
+int		set_err_with_res(t_map_conf *const d, const t_elem e, \
 						const char *resource, const char *msg);
-void	exit_invalid_elem(t_map_data *const data, void (*f)(const char *msg));
+void	exit_invalid_elem(t_map_conf *const conf, void (*f)(const char *msg));
 void	print_dynamic_err_msg(const char *msg);
 
 //	map_utils.c
@@ -94,15 +94,15 @@ void	free_2d(char **arr);
 char	*ft_strrtrim(const char *str);
 
 //	validate_color.c
-int		validate_color_str(t_map_data *const data);
-int		validate_color(t_map_data *const data, const char *str, const t_elem e);
+int		validate_color_str(t_map_conf *const map_conf);
+int		validate_color(t_map_conf *const map_conf, const char *str, const t_elem e);
 
 //	validate_img.c
-int		validate_img_ext(t_map_data *const data);
+int		validate_img_ext(t_map_conf *const conf);
 
 //	validate_map.c
-int		validate_map_has_empty_line(t_map_data *const data);
-int		validate_map_char(t_map_data *const data);
-int		validate_map_only_one_player(t_map_data *const data);
+int		validate_map_has_empty_line(t_map_conf *const conf);
+int		validate_map_char(t_map_conf *const conf);
+int		validate_map_only_one_player(t_map_conf *const conf);
 
 #endif

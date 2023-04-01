@@ -6,13 +6,13 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 16:57:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rotate(t_data *data, int clockwise)
+void	rotate(t_conf *conf, int clockwise)
 {
 	double	new_cam_x;
 	double	new_cam_y;
@@ -23,26 +23,26 @@ void	rotate(t_data *data, int clockwise)
 		clockwise = 1;
 	else
 		clockwise = -1;
-	new_cam_x = data->cam_x * cos(data->rotation_speed * clockwise)
-		- data->cam_y * sin(data->rotation_speed * clockwise);
-	new_cam_y = data->cam_x * sin(data->rotation_speed * clockwise)
-		+ data->cam_y * cos(data->rotation_speed * clockwise);
-	new_fov_x = data->fov_x * cos(data->rotation_speed * clockwise)
-		- data->fov_y * sin(data->rotation_speed * clockwise);
-	new_fov_y = data->fov_x * sin(data->rotation_speed * clockwise)
-		+ data->fov_y * cos(data->rotation_speed * clockwise);
-	data->cam_x = new_cam_x;
-	data->cam_y = new_cam_y;
-	data->fov_x = new_fov_x;
-	data->fov_y = new_fov_y;
+	new_cam_x = conf->cam_x * cos(conf->rotation_speed * clockwise)
+		- conf->cam_y * sin(conf->rotation_speed * clockwise);
+	new_cam_y = conf->cam_x * sin(conf->rotation_speed * clockwise)
+		+ conf->cam_y * cos(conf->rotation_speed * clockwise);
+	new_fov_x = conf->fov_x * cos(conf->rotation_speed * clockwise)
+		- conf->fov_y * sin(conf->rotation_speed * clockwise);
+	new_fov_y = conf->fov_x * sin(conf->rotation_speed * clockwise)
+		+ conf->fov_y * cos(conf->rotation_speed * clockwise);
+	conf->cam_x = new_cam_x;
+	conf->cam_y = new_cam_y;
+	conf->fov_x = new_fov_x;
+	conf->fov_y = new_fov_y;
 }
 
-void	move(t_data *data, int foward)
+void	move(t_conf *conf, int foward)
 {
 	if (foward == TRUE)
 		foward = 1;
 	else
 		foward = -1;
-	data->user_x += data->cam_x * data->move_speed * foward;
-	data->user_y += data->cam_y * data->move_speed * foward;
+	conf->user_x += conf->cam_x * conf->move_speed * foward;
+	conf->user_y += conf->cam_y * conf->move_speed * foward;
 }

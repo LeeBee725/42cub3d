@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:19:17 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_data(t_data *const conf)
+void	init_conf(t_conf *const conf)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ void	init_data(t_data *const conf)
 	conf->char_map = NULL;
 }
 
-void	free_config(t_data *const conf)
+void	free_config(t_conf *const conf)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ void	free_config(t_data *const conf)
 	}
 	if (conf->win)
 		mlx_destroy_window(conf->mlx, conf->win);
-	init_data(conf);
+	init_conf(conf);
 }
 
 static void	_check_extension(const char *const file_name)
@@ -62,7 +62,7 @@ static void	_check_extension(const char *const file_name)
 		exit_with_err(NOT_MATCH_EXTENSION, &print_err_msg);
 }
 
-static void	_set_data(t_data *const conf, t_map_data *const map_data)
+static void	_set_conf(t_conf *const conf, t_map_conf *const map_conf)
 {
 	int	x;
 
@@ -70,9 +70,9 @@ static void	_set_data(t_data *const conf, t_map_data *const map_data)
 	conf->win = mlx_new_window(conf->mlx, WIDTH, HEIGHT, WIN_TITLE);
 	conf->img = malloc(sizeof(t_img));
 	make_image(conf);
-	set_texture(conf, map_data);
-	set_color(conf, map_data);
-	set_map(conf, map_data);
+	set_texture(conf, map_conf);
+	set_color(conf, map_conf);
+	set_map(conf, map_conf);
 	//TODO: Please remove after test
 	x = 0;
 	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[EAST].image, x, 0);
@@ -84,18 +84,18 @@ static void	_set_data(t_data *const conf, t_map_data *const map_data)
 	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[NORTH].image, x, 0);
 }
 
-void	set_data(char *const file_name, t_data *const conf)
+void	set_conf(char *const file_name, t_conf *const conf)
 {
 	int			fd;
-	t_map_data	map_data;
+	t_map_conf	map_conf;
 
-	init_map_data(&map_data);
+	init_map_conf(&map_conf);
 	_check_extension(file_name);
 	fd = open(file_name, O_RDONLY);
 	if (fd == FAIL_FD)
 		exit_with_err(SYS_FILE_OPEN_FAIL, &perror);
-	set_map_data(fd, &map_data);
+	set_map_conf(fd, &map_conf);
 	close(fd);
-	_set_data(conf, &map_data);
-	free_map_data(&map_data);
+	_set_conf(conf, &map_conf);
+	free_map_conf(&map_conf);
 }

@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:23:47 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:44:57 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_data {
+typedef struct s_conf {
 	void	*mlx;
 	void	*win;
 	t_img	wall[4];
@@ -108,7 +108,7 @@ typedef struct s_data {
 	double	user_y;
 	double	move_speed;
 	double	rotation_speed;
-}	t_data;
+}	t_conf;
 
 typedef struct s_ray
 {
@@ -129,35 +129,35 @@ typedef struct s_ray
 }	t_ray;
 
 //	check_map.c
-int		validate_map_surrounded_wall(t_data *const conf);
+int		validate_map_surrounded_wall(t_conf *const conf);
 
 //	conf_color.c
-void	set_color(t_data *const conf, t_map_data *const data);
+void	set_color(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_image.c
-void	set_texture(t_data *const conf, t_map_data *const data);
+void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_map.c
-void	set_map(t_data *const conf, t_map_data *const data);
+void	set_map(t_conf *const conf, t_map_conf *const map_conf);
 
 //	config.c
-void	init_data(t_data *const data);
-void	free_config(t_data *const conf);
-void	set_data(char *const file_name, t_data *const data);
+void	init_conf(t_conf *const conf);
+void	free_config(t_conf *const conf);
+void	set_conf(char *const file_name, t_conf *const conf);
 
-void	make_image(t_data *data);
+void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
-int		key_handle(int key, t_data *data);
+int		key_handle(int key, t_conf *conf);
 
-void	move(t_data *data, int foward);
-void	rotate(t_data *data, int clockwise);
+void	move(t_conf *conf, int foward);
+void	rotate(t_conf *conf, int clockwise);
 
-void	draw_map_2d(t_data *data);
-void	draw_ray_2d(t_data *data, t_ray *ray);
-void	draw_map_3d(t_data *data);
-void	draw_object_3d(t_data *data, t_ray *ray, int x);
+void	draw_map_2d(t_conf *conf);
+void	draw_ray_2d(t_conf *conf, t_ray *ray);
+void	draw_map_3d(t_conf *conf);
+void	draw_object_3d(t_conf *conf, t_ray *ray, int x);
 
-void	calculate(t_data *data);
-void	render(t_data *data);
+void	calculate(t_conf *conf);
+void	render(t_conf *conf);
 
 #endif
