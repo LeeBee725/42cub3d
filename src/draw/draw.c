@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:55:24 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 16:27:43 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	draw_map_3d(t_conf *conf)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				color = 0x0050BCDF;
+				color = conf->colors[0].color;
 			else
-				color = 0x00AAAAAA;
+				color = conf->colors[1].color;
 			put_pixel_to_image(conf->img, x, y, color);
 			x++;
 		}
