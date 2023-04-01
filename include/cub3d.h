@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:58:41 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@
 # define KEY_Z 6
 # define KEY_ESC 53
 
+typedef unsigned int	t_ui;
+
 typedef struct s_trgb {
 	unsigned char	t;
 	unsigned char	r;
@@ -100,7 +102,7 @@ typedef struct s_conf {
 	int				**map;
 	void			*mlx;
 	void			*win;
-	unsigned int	**wall_array[4];
+	t_ui	**wall_array[4];
 	t_img			*img;
 	double			cam_x;
 	double			cam_y;
@@ -154,7 +156,7 @@ void	init_conf(t_conf *const conf);
 void	set_conf(char *const file_name, t_conf *const conf);
 
 // image.c
-unsigned int**	image_to_array(t_img *img);
+t_ui	**image_to_array(t_img *img);
 void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 

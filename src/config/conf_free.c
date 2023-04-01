@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:53:44 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:58:16 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	free_img(void *mlx, t_img *const img)
 	free(img);
 }
 
-static void	free_2d_unsigned_int(unsigned int **arr, int height)
+static void	free_2d_unsigned_int(t_ui **arr, int height)
 {
 	int	i;
 
