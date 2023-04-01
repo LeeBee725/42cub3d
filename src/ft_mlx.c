@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mlx.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/18 17:02:46 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:16:26 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int	key_handle(int key, t_data *data)
 		rotate(data, TRUE);
 	else if (key == KEY_A)
 		rotate(data, FALSE);
+	else if (key == 53)
+		close_window(data);
 	return (0);
 }

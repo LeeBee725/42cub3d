@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 13:54:09 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:24:46 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	calculate_ray(t_data *data, t_ray *ray, int x)
 			ray->map_y += ray->step_y;
 			ray->grid = Y_DIRECTION;
 		}
-		if (data->map[ray->map_y][ray->map_x] > 0)
+		if (data->char_map[ray->map_y][ray->map_x] > 0)
 			hit = TRUE;
 	}
 }
