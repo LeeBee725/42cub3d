@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:45:56 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 20:04:42 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	init_img(t_img *const img)
 	}
 }
 
+static void	_set_each_texture(t_conf *const conf, \
+	t_map_conf *const map_conf, t_elem elem)
+{
+	conf->wall[elem].image = mlx_xpm_file_to_image(conf->mlx, \
+		map_conf->texture_path[elem], \
+		&conf->wall[elem].width, &conf->wall[elem].height);
+	conf->wall[elem].addr = mlx_get_data_addr(conf->wall[elem].image, \
+		&conf->wall[elem].bits_per_pixel, \
+		&conf->wall[elem].size_line, &conf->wall[elem].endian);
+	conf->wall_array[elem] = image_to_array(&(conf->wall[elem]));
+	if (!conf->wall[elem].image || !conf->wall_array[elem])
+	{
+		free_config(conf);
+		map_conf->err_elem = elem;
+		map_conf->err_msg = ft_strjoin(": ", map_conf->texture_path[elem]);
+		exit_invalid_elem(map_conf, &perror_dynamic_err_msg);
+	}
+}
+
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf)
 {
 	t_elem	elem;
@@ -38,20 +57,7 @@ void	set_texture(t_conf *const conf, t_map_conf *const map_conf)
 	elem = EAST;
 	while (elem <= NORTH)
 	{
-		conf->wall[elem].image = mlx_xpm_file_to_image(\
-				conf->mlx, map_conf->texture_path[elem], \
-				&conf->wall[elem].width, &conf->wall[elem].height);
-		conf->wall[elem].addr = mlx_get_data_addr(\
-				conf->wall[elem].image, &conf->wall[elem].bits_per_pixel, \
-				&conf->wall[elem].size_line, &conf->wall[elem].endian);
-		conf->wall_array[elem] = image_to_array(&(conf->wall[elem]));
-		if (!conf->wall[elem].image || !conf->wall_array[elem])
-		{
-			free_config(conf);
-			map_conf->err_elem = elem;
-			map_conf->err_msg = ft_strjoin(": ", map_conf->texture_path[elem]);
-			exit_invalid_elem(map_conf, &perror_dynamic_err_msg);
-		}
+		_set_each_texture(conf, map_conf, elem);
 		++elem;
 	}
 }

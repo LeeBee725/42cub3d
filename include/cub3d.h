@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:58:41 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:59:39 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,24 +96,24 @@ typedef struct s_img
 }	t_img;
 
 typedef struct s_conf {
-	t_img			wall[4];
-	t_color			colors[2];
-	char			**c_map;
-	int				**map;
-	void			*mlx;
-	void			*win;
+	t_img	wall[4];
+	t_color	colors[2];
+	char	**c_map;
+	int		**map;
+	void	*mlx;
+	void	*win;
 	t_ui	**wall_array[4];
-	t_img			*img;
-	double			cam_x;
-	double			cam_y;
-	double			fov_x;
-	double			fov_y;
-	double			user_x;
-	double			user_y;
-	double			move_speed;
-	double			rotation_speed;
-	int				map_width;
-	int				map_height;
+	t_img	*img;
+	double	cam_x;
+	double	cam_y;
+	double	fov_x;
+	double	fov_y;
+	double	user_x;
+	double	user_y;
+	double	move_speed;
+	double	rotation_speed;
+	int		map_width;
+	int		map_height;
 }	t_conf;
 
 typedef struct s_ray

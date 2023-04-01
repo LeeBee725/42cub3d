@@ -6,18 +6,18 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:58:04 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 20:02:55 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_ui**	image_to_array(t_img *img)
+t_ui	**image_to_array(t_img *img)
 {
-	t_ui**	array;
-	int				i;
-	int				j;
-	
+	t_ui	**array;
+	int		i;
+	int		j;
+
 	if (img->bits_per_pixel != 32 || \
 		img->height != TEXTURE_LENGTH || img->width != TEXTURE_LENGTH)
 		return (NULL);
@@ -25,16 +25,15 @@ t_ui**	image_to_array(t_img *img)
 	if (!array)
 		return (NULL);
 	i = 0;
-	while (i < 64)
+	while (i < TEXTURE_LENGTH)
 	{
 		array[i] = malloc(sizeof(t_ui) * TEXTURE_LENGTH);
 		if (!array[i])
 			return (NULL);
 		j = 0;
-		while (j < 64)
+		while (j < TEXTURE_LENGTH)
 		{
-			array[i][j] = *((t_ui *)(img->addr) + \
-				i * TEXTURE_LENGTH + j);
+			array[i][j] = *((t_ui *)(img->addr) + i * TEXTURE_LENGTH + j);
 			j++;
 		}
 		i++;
