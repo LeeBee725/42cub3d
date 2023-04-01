@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 23:01:34 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 23:03:05 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 13:43:53 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static char	**_create_visitted_map(const int h, const int w)
 		visitted[r][w] = '\0';
 		++r;
 	}
+	visitted[r] = NULL;
 	return (visitted);
 }
 
