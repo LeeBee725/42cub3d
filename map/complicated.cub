@@ -3,8 +3,8 @@ SO ./image/bluestone.xpm
 WE ./image/eagle.xpm
 EA      ./image/redbrick.xpm
 
-F 25,10,100
-C 255,255,255
+F 0,255,0
+C 0,0,255
 
 
         1111111111111111111111111
