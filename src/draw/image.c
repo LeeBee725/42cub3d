@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:34:22 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:04:40 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@ unsigned int**	image_to_array(t_img *img)
 	int				i;
 	int				j;
 	
-	if (img->bits_per_pixel != 32 || img->height != 64 || img->width != 64)
+	if (img->bits_per_pixel != 32 || \
+		img->height != TEXTURE_LENGTH || img->width != TEXTURE_LENGTH)
 		return (NULL);
-	array = (unsigned int **)malloc(sizeof(unsigned int *) * 64);
+	array = malloc(sizeof(unsigned int *) * TEXTURE_LENGTH);
 	if (!array)
 		return (NULL);
 	i = 0;
 	while (i < 64)
 	{
-		array[i] = (unsigned int *)malloc(sizeof(unsigned int) * 64);
+		array[i] = malloc(sizeof(unsigned int) * TEXTURE_LENGTH);
 		if (!array[i])
 			return (NULL);
 		j = 0;
 		while (j < 64)
 		{
-			array[i][j] = *((unsigned int *)(img->addr) + i * 64 + j);
+			array[i][j] = *((unsigned int *)(img->addr) + \
+				i * TEXTURE_LENGTH + j);
 			j++;
 		}
 		i++;

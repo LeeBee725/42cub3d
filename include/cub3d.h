@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:42:16 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:03:52 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define HEIGHT 1080
 # define REC_WIDTH 20
 # define REC_HEIGHT 20
+# define TEXTURE_LENGTH 64
 # define X_DIRECTION 0
 # define Y_DIRECTION 1
 # define TRUE 1
