@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:57:00 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 17:23:52 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	_set_map(t_conf *const conf)
 void	set_map(t_conf *const conf)
 {
 	int	i;
-	int	j;\
+	int	j;
 
 	if (_set_map(conf) == FAIL)
 	{

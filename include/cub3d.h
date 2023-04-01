@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 16:46:44 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:51:09 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,49 +130,57 @@ typedef struct s_ray
 	int		grid;
 }	t_ray;
 
-//	check_map.c
-int		validate_map_surrounded_wall(t_conf *const conf);
-
-//	conf_color.c
+//	config/conf_color.c
 void	set_color(t_conf *const conf, t_map_conf *const map_conf);
 
-//	conf_image.c
+//	config/conf_image.c
 void	init_img(t_img *const img);
 void	free_img(void *mlx, t_img *const img);
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
-//	conf_charmap.c
+//	config/conf_charmap.c
 void	set_charmap(t_conf *const conf, t_map_conf *const map_conf);
 
-// conf_map.c
+//	config/conf_map.c
 void	set_map(t_conf *const conf);
 
-//	config.c
+//	config/config.c
 void	init_conf(t_conf *const conf);
 void	free_config(t_conf *const conf);
 void	set_conf(char *const file_name, t_conf *const conf);
 
-// image.c
+//	draw/image.c
 void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
-// draw.c
+//	draw/draw_player.c
+void	draw_player(t_conf *conf, t_ray *ray);
+
+//	draw/draw.c
 void	draw_map_2d(t_conf *conf);
 void	draw_ray_2d(t_conf *conf, t_ray *ray);
 void	draw_map_3d(t_conf *conf);
 void	draw_object_3d(t_conf *conf, t_ray *ray, int x);
 
-// render.c
+//	draw/render.c
 void	render(t_conf *conf);
 
-// calculate.c
+//	play/calculate.c
 void	calculate(t_conf *conf);
 
-// play.c
+//	play/move.c
 void	move(t_conf *conf, int foward);
 void	rotate(t_conf *conf, int clockwise);
 
-// hook.c
+//	play/ray.c
+void	set_step(t_ray *ray);
+void	set_distance(t_ray *ray);
+void	make_ray(t_conf *conf, t_ray *ray, int x);
+
+//	validate/validate_wall.c
+int		validate_map_surrounded_wall(t_conf *const conf);
+
+//	hook.c
 int		loop(t_conf *conf);
 int		key_handle(int key, t_conf *conf);
 

@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 16:27:43 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:51:35 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,7 @@ void	draw_ray_2d(t_conf *conf, t_ray *ray)
 	double	y;
 	int		i;
 
-	y = -REC_HEIGHT / 4;
-	while (y < REC_HEIGHT / 4)
-	{
-		x = -REC_WIDTH / 4;
-		while (x < REC_WIDTH / 4)
-		{
-			put_pixel_to_image(conf->img, \
-				(ray->user_x * REC_WIDTH + x), \
-				(ray->user_y * REC_HEIGHT + y), BLUE);
-			x++;
-		}
-		y++;
-	}
+	draw_player(conf, ray);
 	i = 0;
 	while (i < 40)
 	{

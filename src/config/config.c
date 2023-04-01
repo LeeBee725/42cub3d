@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 16:06:18 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 17:31:26 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static void	_check_extension(const char *const file_name)
 
 static void	_set_conf(t_conf *const conf, t_map_conf *const map_conf)
 {
-	int	x;
-
 	conf->mlx = mlx_init();
 	conf->win = mlx_new_window(conf->mlx, WIDTH, HEIGHT, WIN_TITLE);
 	conf->img = malloc(sizeof(t_img));
@@ -91,15 +89,6 @@ static void	_set_conf(t_conf *const conf, t_map_conf *const map_conf)
 	set_color(conf, map_conf);
 	set_charmap(conf, map_conf);
 	set_map(conf);
-	//TODO: Please remove after test
-	x = 0;
-	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[EAST].image, x, 0);
-	x += conf->wall[EAST].width;
-	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[WEST].image, x, 0);
-	x += conf->wall[WEST].width;
-	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[SOUTH].image, x, 0);
-	x += conf->wall[SOUTH].width;
-	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[NORTH].image, x, 0);
 }
 
 void	set_conf(char *const file_name, t_conf *const conf)
