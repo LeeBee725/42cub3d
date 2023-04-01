@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 14:55:24 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	draw_rectangle(t_conf *conf, int x, int y, int fill)
 	int	j;
 
 	if (fill > 0)
-		color = 0x00555555;
+		color = GRAY;
 	else
-		color = 0x00FFFFFF;
+		color = WHITE;
 	i = 0;
 	while (i < REC_WIDTH)
 	{
@@ -30,7 +30,7 @@ void	draw_rectangle(t_conf *conf, int x, int y, int fill)
 		{
 			if (i == REC_WIDTH - 1 || j == REC_HEIGHT - 1)
 				put_pixel_to_image(conf->img, x * REC_WIDTH + i, \
-					y * REC_HEIGHT + j, 0x00000000);
+					y * REC_HEIGHT + j, BLACK);
 			else
 				put_pixel_to_image(conf->img, x * REC_WIDTH + i, \
 					y * REC_HEIGHT + j, color);

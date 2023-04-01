@@ -6,19 +6,19 @@
 #    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 14:41:51 by sryou            ###   ########.fr        #
+#    Updated: 2023/04/01 15:06:57 by sryou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 SRCS_DIR:=	./src
-SRCS	:=	$(addsuffix .c,	cub3d error\
+SRCS	:=	$(addsuffix .c,	cub3d hook error\
 							config/config config/conf_image config/conf_color config/conf_map\
 							map/map_parser map/map_elem map/map_utils map/map_error\
 							validate/validate_img validate/validate_color validate/validate_map validate/check_map\
 							play/calculate play/move\
-							draw/draw draw/render draw/ft_mlx)
+							draw/draw draw/render draw/image)
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror

@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:57 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:07:31 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define Y_DIRECTION 1
 # define TRUE 1
 # define FALSE 0
+# define WHITE 0x00FFFFFF
+# define BLACK 0x00000000
+# define GRAY 0x00555555
 # define RED 0x00FF0000
 # define YELLOW 0x00FFFF00
 # define BLUE 0x000000FF
@@ -64,8 +67,7 @@
 # define KEY_X 7
 # define KEY_Y 16
 # define KEY_Z 6
-
-# define ON_DESTROY 17
+# define KEY_ESC 53
 
 typedef struct s_trgb {
 	unsigned char	t;
@@ -145,19 +147,28 @@ void	init_conf(t_conf *const conf);
 void	free_config(t_conf *const conf);
 void	set_conf(char *const file_name, t_conf *const conf);
 
+// image.c
 void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
-int		key_handle(int key, t_conf *conf);
 
-void	move(t_conf *conf, int foward);
-void	rotate(t_conf *conf, int clockwise);
-
+// draw.c
 void	draw_map_2d(t_conf *conf);
 void	draw_ray_2d(t_conf *conf, t_ray *ray);
 void	draw_map_3d(t_conf *conf);
 void	draw_object_3d(t_conf *conf, t_ray *ray, int x);
 
-void	calculate(t_conf *conf);
+// render.c
 void	render(t_conf *conf);
+
+// calculate.c
+void	calculate(t_conf *conf);
+
+// play.c
+void	move(t_conf *conf, int foward);
+void	rotate(t_conf *conf, int clockwise);
+
+// hook.c
+int		loop(t_conf *conf);
+int		key_handle(int key, t_conf *conf);
 
 #endif
