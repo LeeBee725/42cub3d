@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conf_charmap.c                                     :+:      :+:    :+:   */
+/*   conf_cmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:23:06 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:53:52 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ static int	_set_charmap(t_conf *const conf, t_map_conf *const map_conf)
 
 	conf->map_width = map_conf->map_max_width;
 	conf->map_height = map_conf->map_max_height;
-	conf->char_map = (char **)malloc(sizeof(char *) * (conf->map_height + 1));
-	if (!conf->char_map)
+	conf->c_map = (char **)malloc(sizeof(char *) * (conf->map_height + 1));
+	if (!conf->c_map)
 		return (FAIL);
-	ft_bzero(conf->char_map, sizeof(char *) * (conf->map_height + 1));
+	ft_bzero(conf->c_map, sizeof(char *) * (conf->map_height + 1));
 	i = 0;
 	cur = map_conf->raw_map;
 	while (cur && i < conf->map_height)
 	{
-		conf->char_map[i] = (char *)ft_calloc(conf->map_width + 1, sizeof(char));
-		if (!conf->char_map[i])
+		conf->c_map[i] = (char *)ft_calloc(conf->map_width + 1, sizeof(char));
+		if (!conf->c_map[i])
 			return (FAIL);
-		ft_memset(conf->char_map[i], ' ', sizeof(char) * conf->map_width);
-		ft_strlcpy(conf->char_map[i], (char *)cur->content, \
+		ft_memset(conf->c_map[i], ' ', sizeof(char) * conf->map_width);
+		ft_strlcpy(conf->c_map[i], (char *)cur->content, \
 			ft_strlen((char *)cur->content) + 1);
 		if ((size_t)conf->map_width != ft_strlen((char *)cur->content))
-			conf->char_map[i][ft_strlen((char *)cur->content)] = ' ';
+			conf->c_map[i][ft_strlen((char *)cur->content)] = ' ';
 		cur = cur->next;
 		++i;
 	}
@@ -74,7 +74,7 @@ static void	_print_map(t_conf *const conf) // TODO: remove after test
 {
 	int	i;
 
-	if (!conf->char_map)
+	if (!conf->c_map)
 	{
 		printf("Map:(null)\n");
 		return ;
@@ -88,9 +88,9 @@ static void	_print_map(t_conf *const conf) // TODO: remove after test
 	}
 	printf("\n");
 	i = 0;
-	while (conf->char_map[i])
+	while (conf->c_map[i])
 	{
-		printf("#%s#\n", conf->char_map[i]);
+		printf("#%s#\n", conf->c_map[i]);
 		++i;
 	}
 	i = 0;

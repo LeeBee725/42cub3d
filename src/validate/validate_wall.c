@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 23:01:34 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:46:14 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	_check(t_conf *const conf, char ***v, const int r, const int c)
 	const int	dy[4] = {0, 0, 1, -1};
 	int			i;
 
-	if (conf->char_map[r][c] == ' ')
+	if (conf->c_map[r][c] == ' ')
 		return (FAIL);
-	if (conf->char_map[r][c] == '1')
+	if (conf->c_map[r][c] == '1')
 		return (SUCCESS);
 	(*v)[r][c] = '1';
 	i = 0;
@@ -49,9 +49,9 @@ static int	_check_all_path(t_conf *const conf, char ***visitted)
 		c = 0;
 		while (c < conf->map_width)
 		{
-			if ((*visitted)[r][c] == '0' && (conf->char_map[r][c] == '0' \
-				|| conf->char_map[r][c] == 'E' || conf->char_map[r][c] == 'W' \
-				|| conf->char_map[r][c] == 'S' || conf->char_map[r][c] == 'N'))
+			if ((*visitted)[r][c] == '0' && (conf->c_map[r][c] == '0' \
+				|| conf->c_map[r][c] == 'E' || conf->c_map[r][c] == 'W' \
+				|| conf->c_map[r][c] == 'S' || conf->c_map[r][c] == 'N'))
 				if (_check(conf, visitted, r, c) == FAIL)
 					return (FAIL);
 			++c;

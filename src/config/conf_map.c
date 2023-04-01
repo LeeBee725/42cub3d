@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:23:52 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	_set_map(t_conf *const conf)
 		j = 0;
 		while (j < conf->map_width)
 		{
-			if (conf->char_map[i][j] == '1' || conf->char_map[i][j] == ' ')
+			if (conf->c_map[i][j] == '1' || conf->c_map[i][j] == ' ')
 				conf->map[i][j] = 1;
 			else
 				conf->map[i][j] = 0;
@@ -88,9 +88,9 @@ void	set_map(t_conf *const conf)
 		j = 0;
 		while (j < conf->map_width)
 		{
-			if (conf->char_map[i][j] == 'N' || conf->char_map[i][j] == 'S' \
-			|| conf->char_map[i][j] == 'E' || conf->char_map[i][j] == 'W')
-				_set_user(conf, j, i, conf->char_map[i][j]);
+			if (conf->c_map[i][j] == 'N' || conf->c_map[i][j] == 'S' \
+			|| conf->c_map[i][j] == 'E' || conf->c_map[i][j] == 'W')
+				_set_user(conf, j, i, conf->c_map[i][j]);
 			j++;
 		}
 		i++;

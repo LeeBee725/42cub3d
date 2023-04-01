@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:46:00 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_conf(t_conf *const conf)
 	conf->cam_y = 0;
 	conf->fov_x = 0;
 	conf->fov_y = 0;
-	conf->char_map = NULL;
+	conf->c_map = NULL;
 	conf->map = NULL;
 }
 

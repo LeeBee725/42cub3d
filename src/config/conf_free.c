@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:25:55 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:53:44 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	free_config(t_conf *const conf)
 {
 	int	i;
 
-	free_2d(conf->char_map);
+	free_2d(conf->c_map);
 	free_2d_int(conf->map, conf->map_height);
 	free_img(conf->mlx, conf->img);
 	i = 0;
