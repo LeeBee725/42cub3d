@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:44:42 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,14 @@ void	init_conf(t_conf *const conf)
 	conf->colors[1].color = 0;
 	conf->map_width = 0;
 	conf->map_height = 0;
+	conf->move_speed = 0.08;
+	conf->rotation_speed = 0.04;
+	conf->cam_x = 0;
+	conf->cam_y = 0;
+	conf->fov_x = 0;
+	conf->fov_y = 0;
 	conf->char_map = NULL;
+	conf->map = NULL;
 }
 
 void	free_config(t_conf *const conf)
@@ -72,7 +79,8 @@ static void	_set_conf(t_conf *const conf, t_map_conf *const map_conf)
 	make_image(conf);
 	set_texture(conf, map_conf);
 	set_color(conf, map_conf);
-	set_map(conf, map_conf);
+	set_charmap(conf, map_conf);
+	set_map(conf);
 	//TODO: Please remove after test
 	x = 0;
 	mlx_put_image_to_window(conf->mlx, conf->win, conf->wall[EAST].image, x, 0);

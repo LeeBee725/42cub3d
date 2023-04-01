@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:07:31 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:22:50 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,11 @@ void	set_color(t_conf *const conf, t_map_conf *const map_conf);
 //	conf_image.c
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
-//	conf_map.c
-void	set_map(t_conf *const conf, t_map_conf *const map_conf);
+//	conf_charmap.c
+void	set_charmap(t_conf *const conf, t_map_conf *const map_conf);
+
+// conf_map.c
+void	set_map(t_conf *const conf);
 
 //	config.c
 void	init_conf(t_conf *const conf);
