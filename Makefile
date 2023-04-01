@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
+#    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 18:54:04 by sryou            ###   ########.fr        #
+#    Updated: 2023/04/01 21:08:09 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS	:=	$(addsuffix .c,	cub3d hook error\
 							map/map_parser map/map_elem map/map_utils map/map_error\
 							validate/validate_img validate/validate_color validate/validate_map validate/validate_wall\
 							play/calculate play/move play/ray\
-							draw/draw draw/render draw/image draw/draw_player)
+							draw/draw_2d draw/draw_3d draw/render draw/image)
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
