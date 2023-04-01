@@ -3,20 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
+#    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 14:10:36 by junhelee         ###   ########.fr        #
+#    Updated: 2023/04/01 14:40:18 by sryou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:=	cub3D
 
 SRCS_DIR:=	./src
-SRCS	:=	$(addsuffix .c,	cub3d error config conf_image conf_color conf_map\
-							map_parser map_elem map_utils map_error\
-							validate_img validate_color validate_map check_map\
-							ft_mlx calculate draw render move)
+SRCS	:=	$(addsuffix .c,	cub3d error\
+							config/config config/conf_image config/conf_color config/conf_map\
+							map/map_parser map/map_elem map/map_utils map/map_error\
+							validate/validate_img validate/validate_color validate/validate_map validate/check_map\
+							play/calculate play/move\
+							draw/draw draw/render draw/ft_mlx)
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror
@@ -61,12 +63,9 @@ $(NAME): $(OBJS)
 clean:
 	@$(MAKE) -C $(LIBFT) clean
 	@$(MAKE) -C $(MLX_DIR) clean
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS)
 
-fclean:
-	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(MLX_DIR) clean
-	$(RM) $(OBJ_DIR)
+fclean: clean
 	$(RM) $(NAME)
 
 re:
