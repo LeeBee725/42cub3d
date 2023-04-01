@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:43:18 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:46:07 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,7 @@ void	draw_ray_2d(t_conf *conf, t_ray *ray)
 	double	y;
 	int		i;
 
-	y = -REC_HEIGHT / 4;
-	while (y < REC_HEIGHT / 4)
-	{
-		x = -REC_WIDTH / 4;
-		while (x < REC_WIDTH / 4)
-		{
-			put_pixel_to_image(conf->img, \
-				(ray->user_x * REC_WIDTH + x), \
-				(ray->user_y * REC_HEIGHT + y), BLUE);
-			x++;
-		}
-		y++;
-	}
+	draw_player(conf, ray);
 	i = 0;
 	while (i < 40)
 	{
@@ -101,9 +89,9 @@ void	draw_map_3d(t_conf *conf)
 		while (x < WIDTH)
 		{
 			if (y < HEIGHT / 2)
-				color = 0x0050BCDF;
+				color = conf->colors[0].color;
 			else
-				color = 0x00AAAAAA;
+				color = conf->colors[1].color;
 			put_pixel_to_image(conf->img, x, y, color);
 			x++;
 		}

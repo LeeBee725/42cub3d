@@ -6,7 +6,7 @@
 #    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 17:23:33 by sryou            ###   ########.fr        #
+#    Updated: 2023/04/01 18:45:02 by sryou            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ SRCS_DIR:=	./src
 SRCS	:=	$(addsuffix .c,	cub3d hook error\
 							config/config config/conf_free config/conf_image config/conf_color config/conf_map config/conf_charmap\
 							map/map_parser map/map_elem map/map_utils map/map_error\
-							validate/validate_img validate/validate_color validate/validate_map validate/check_map\
-							play/calculate play/move\
-							draw/draw draw/render draw/image)
+							validate/validate_img validate/validate_color validate/validate_map validate/validate_wall\
+							play/calculate play/move play/ray\
+							draw/draw draw/render draw/image draw/draw_player)
 
 CC		:=	cc
 CFLAGS	:=	-Wall -Wextra -Werror

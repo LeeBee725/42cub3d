@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 17:22:09 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,17 @@ void	rotate(t_conf *conf, int clockwise)
 
 void	move(t_conf *conf, int foward)
 {
+	double	new_x;
+	double	new_y;
+
 	if (foward == TRUE)
 		foward = 1;
 	else
 		foward = -1;
-	conf->user_x += conf->cam_x * conf->move_speed * foward;
-	conf->user_y += conf->cam_y * conf->move_speed * foward;
+	new_x = conf->user_x + conf->cam_x * conf->move_speed * foward;
+	new_y = conf->user_y + conf->cam_y * conf->move_speed * foward;
+	if (conf->map[(int)floor(new_y)][(int)floor(conf->user_x)] != 1)
+		conf->user_y = new_y;
+	if (conf->map[(int)floor(conf->user_y)][(int)floor(new_x)] != 1)
+		conf->user_x = new_x;
 }

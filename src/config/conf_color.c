@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:50:08 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:01:04 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static int	_set_color(t_color *color, t_map_conf *const conf, const t_elem e)
 	color->trgb.r = (unsigned char)ft_atoi(splitted[0]);
 	color->trgb.g = (unsigned char)ft_atoi(splitted[1]);
 	color->trgb.b = (unsigned char)ft_atoi(splitted[2]);
+	color->color |= color->trgb.r << 16;
+	color->color |= color->trgb.g << 8;
+	color->color |= color->trgb.b;
 	free_2d(splitted);
 	return (SUCCESS);
 }

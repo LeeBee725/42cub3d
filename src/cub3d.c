@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:45:17 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:45:45 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int	main(int argc, char *argv[])
 	mlx_hook(conf.win, KEY_PRESS, 0, &key_handle, &conf);
 	mlx_loop_hook(conf.mlx, &loop, &conf);
 	mlx_loop(conf.mlx);
-	free_config(&conf);
-	return (0);
+	return (NO_ERROR);
 }
