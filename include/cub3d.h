@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:45:38 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 18:57:29 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,14 @@ typedef struct s_img
 }	t_img;
 
 typedef struct s_conf {
+	t_img			wall[4];
+	t_color			colors[2];
 	void			*mlx;
 	void			*win;
 	unsigned int	**wall_array[4];
 	t_img			*img;
 	char			**char_map;
 	int				**map;
-	t_img			wall[4];
-	t_color			colors[2];
-	int				map_width;
-	int				map_height;
 	double			cam_x;
 	double			cam_y;
 	double			fov_x;
@@ -112,6 +110,8 @@ typedef struct s_conf {
 	double			user_y;
 	double			move_speed;
 	double			rotation_speed;
+	int				map_width;
+	int				map_height;
 }	t_conf;
 
 typedef struct s_ray
