@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:47:56 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:11:26 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	print_dynamic_err_msg(const char *msg);
 //	map_utils.c
 int		is_space(const unsigned char c);
 int		is_empty_line(char *line);
-void	free_2d(char **arr);
 char	*ft_strrtrim(const char *str);
 
 //	validate_color.c

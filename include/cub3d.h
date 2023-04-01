@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 16:05:43 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 17:42:16 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,24 @@ typedef struct s_img
 }	t_img;
 
 typedef struct s_conf {
-	void	*mlx;
-	void	*win;
-	t_img	wall[4];
-	t_color	colors[2];
-	t_img	*img;
-	char	**char_map;
-	int		**map;
-	int		map_width;
-	int		map_height;
-	double	cam_x;
-	double	cam_y;
-	double	fov_x;
-	double	fov_y;
-	double	user_x;
-	double	user_y;
-	double	move_speed;
-	double	rotation_speed;
+	void			*mlx;
+	void			*win;
+	unsigned int	**wall_array[4];
+	t_img			*img;
+	char			**char_map;
+	int				**map;
+	t_img			wall[4];
+	t_color			colors[2];
+	int				map_width;
+	int				map_height;
+	double			cam_x;
+	double			cam_y;
+	double			fov_x;
+	double			fov_y;
+	double			user_x;
+	double			user_y;
+	double			move_speed;
+	double			rotation_speed;
 }	t_conf;
 
 typedef struct s_ray
@@ -138,7 +139,6 @@ void	set_color(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_image.c
 void	init_img(t_img *const img);
-void	free_img(void *mlx, t_img *const img);
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_charmap.c
@@ -147,12 +147,16 @@ void	set_charmap(t_conf *const conf, t_map_conf *const map_conf);
 // conf_map.c
 void	set_map(t_conf *const conf);
 
+// conf_free.c
+void	free_2d(char **arr);
+void	free_config(t_conf *const conf);
+
 //	config.c
 void	init_conf(t_conf *const conf);
-void	free_config(t_conf *const conf);
 void	set_conf(char *const file_name, t_conf *const conf);
 
 // image.c
+unsigned int**	image_to_array(t_img *img);
 void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 

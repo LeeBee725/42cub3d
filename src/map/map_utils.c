@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/03/29 15:58:34 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:09:39 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,6 @@ int	is_empty_line(char *line)
 		++i;
 	}
 	return (TRUE);
-}
-
-void	free_2d(char **arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		arr[i] = NULL;
-		++i;
-	}
-	free(arr);
-	arr = NULL;
 }
 
 char	*ft_strrtrim(const char *str)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 15:48:02 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:43:32 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parser.h"
+#include "cub3d.h"
 
 int	_validate_color_str(t_map_conf *const conf, const char *str, const t_elem e)
 {
