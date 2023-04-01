@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_color.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:48:02 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	_validate_out_of_range(const int val, char **to_free)
 	return (SUCCESS);
 }
 
-int	validate_color(t_map_conf *const conf, const char *str, const t_elem e)
+int	validate_color(t_map_conf *const conf, const char *str, t_elem e)
 {
 	char	**splitted;
 	int		i;

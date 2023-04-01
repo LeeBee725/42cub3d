@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:57 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:17:17 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int		validate_map_surrounded_wall(t_conf *const conf);
 void	set_color(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_image.c
+void	init_img(t_img *const img);
+void	free_img(void *mlx, t_img *const img);
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
 //	conf_map.c

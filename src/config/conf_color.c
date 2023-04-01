@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:47:53 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:50:08 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	set_color(t_conf *const conf, t_map_conf *const map_conf)
 	e = CEILING;
 	while (e <= FLOOR)
 	{
-		if (validate_color(map_conf, map_conf->color_str[e - CEILING], e) == FAIL)
+		if (validate_color(map_conf, \
+			map_conf->color_str[e - CEILING], e) == FAIL)
 		{
 			free_config(conf);
 			exit_invalid_elem(map_conf, &print_dynamic_err_msg);

@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   conf_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:47:09 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 15:23:20 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_img(t_img *const img)
+{
+	if (img)
+	{
+		img->image = NULL;
+		img->width = 0;
+		img->height = 0;
+		img->addr = NULL;
+		img->bits_per_pixel = 0;
+		img->size_line = 0;
+		img->endian = 0;
+	}
+}
+
+void	free_img(void *mlx, t_img *const img)
+{
+	if (img->image)
+		mlx_destroy_image(mlx, img->image);
+	if (img->addr)
+		free(img->addr);
+}
 
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf)
 {
