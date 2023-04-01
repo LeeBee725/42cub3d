@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sryou <sryou@student.42.fr>                +#+  +:+       +#+         #
+#    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/01 14:41:51 by sryou            ###   ########.fr        #
+#    Updated: 2023/04/01 15:00:40 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ INCLUDES:=	-I./include -I$(LIBFT) -I$(MLX_DIR) -O3
 endif
 
 OBJ_DIR	:=	./object
+O_DIRS	:=	$(OBJ_DIR) $(addprefix $(OBJ_DIR)/, config map validate play draw)
 OBJS	:=	$(patsubst %,$(OBJ_DIR)/%,$(SRCS:%.c=%.o))
 
 LINK_FT	:=	-L$(LIBFT) -lft
@@ -52,7 +53,7 @@ LINKING	:=	$(LINK_MLX) $(LINK_FT)
 all: $(NAME)
 
 $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
-	@$(MKDIR) $(OBJ_DIR)
+	@$(MKDIR) $(O_DIRS)
 	$(COMPILE) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
