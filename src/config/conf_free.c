@@ -6,7 +6,7 @@
 /*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 20:32:50 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/01 20:46:36 by sryou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	free_config(t_conf *const conf)
 	while (i < 4)
 	{
 		free_img(conf->mlx, &conf->wall[i]);
-		free_2d_unsigned_int(conf->wall_array[i], 64);
+		free_2d_unsigned_int(conf->wall_array[i], TEXTURE_LENGTH);
 		++i;
 	}
 	if (conf->win)
