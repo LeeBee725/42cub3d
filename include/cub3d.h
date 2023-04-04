@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/04 13:12:43 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:12:25 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@
 # define KEY_Y 16
 # define KEY_Z 6
 # define KEY_ESC 53
+# define SEG_NUM 6
 
 typedef unsigned int	t_ui;
 

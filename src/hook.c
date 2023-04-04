@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/04 14:08:14 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:25:33 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,25 @@ static int	_close_window(t_conf *conf)
 	exit(NO_ERROR);
 }
 
+void	move_mouse(t_conf *conf)
+{
+	int	w_per_seg;
+	int	x;
+	int	y;
+
+	w_per_seg = WIDTH / SEG_NUM;
+	mlx_mouse_get_pos(conf->mlx, conf->win, &x, &y);
+	if (0 <= x && x <= w_per_seg && 0 <= y && y <= HEIGHT)
+		rotate(conf, FALSE);
+	else if (WIDTH - w_per_seg <= x && x <= WIDTH && 0 <= y && y <= HEIGHT)
+		rotate(conf, TRUE);
+}
+
 int	loop(t_conf *conf)
 {
 	calculate(conf);
 	render(conf);
+	move_mouse(conf);
 	return (0);
 }
 
