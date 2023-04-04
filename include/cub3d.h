@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 20:32:42 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/04 13:12:43 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void	render(t_conf *conf);
 void	calculate(t_conf *conf);
 
 //	play/move.c
-void	move(t_conf *conf, int foward);
+void	move(t_conf *conf, int foward, int horizen);
 void	rotate(t_conf *conf, int clockwise);
 
 //	play/ray.c

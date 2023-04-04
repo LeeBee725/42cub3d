@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/04 11:17:39 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:08:14 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ int key_handle(int key, t_conf *conf)
 	else if (key == 0xff1b) // ESC
 		_close_window(conf);
 	if (key == 0x77) // W
-		move(conf, TRUE);
+		move(conf, TRUE, FALSE);
 	else if (key == 0x73) // S
-		move(conf, FALSE);
+		move(conf, FALSE, FALSE);
 	else if (key == 0x64) // D
-		rotate(conf, TRUE);
+		move(conf, FALSE, TRUE);
 	else if (key == 0x61) // A
+		move(conf, TRUE, TRUE);
+	else if (key == 0xff51) // left
 		rotate(conf, FALSE);
+	else if (key == 0xff53) // right
+		rotate(conf, TRUE);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:22:09 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:14:40 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,27 @@ void	rotate(t_conf *conf, int clockwise)
 	conf->fov_y = new_fov_y;
 }
 
-void	move(t_conf *conf, int foward)
+void	move(t_conf *conf, int foward, int horizen)
 {
 	double	new_x;
 	double	new_y;
+	double	fov_mg;
 
 	if (foward == TRUE)
 		foward = 1;
 	else
 		foward = -1;
-	new_x = conf->user_x + conf->cam_x * conf->move_speed * foward;
-	new_y = conf->user_y + conf->cam_y * conf->move_speed * foward;
+	fov_mg = sqrt(conf->fov_x * conf->fov_x + conf->fov_y * conf->fov_y);
+	if (horizen)
+	{
+		new_x = conf->user_x + conf->fov_x / fov_mg * conf->move_speed * foward;
+		new_y = conf->user_y + conf->fov_y / fov_mg * conf->move_speed * foward;
+	}
+	else
+	{
+		new_x = conf->user_x + conf->cam_x * conf->move_speed * foward;
+		new_y = conf->user_y + conf->cam_y * conf->move_speed * foward;
+	}
 	if (conf->map[(int)floor(new_y)][(int)floor(conf->user_x)] != 1)
 		conf->user_y = new_y;
 	if (conf->map[(int)floor(conf->user_y)][(int)floor(new_x)] != 1)
