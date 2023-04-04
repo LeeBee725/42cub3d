@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:48:18 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/04 13:02:54 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_conf(t_conf *const conf)
 	while (i < 4)
 	{
 		init_img(&conf->wall[i]);
+		conf->wall_array[i] = NULL;
 		++i;
 	}
 	conf->colors[0].color = 0;
