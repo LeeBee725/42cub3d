@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 11:24:51 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:23:25 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 # define VALUE_IS_NULL ": This value is NULL"
 # define IMG_MUST_BE ": The texture file must be "
+# define DOUBLE_KEYS ": The element is duplicated"
 
 # define COLOR_UNDEFINED ": Undefined character"
 # define COLOR_WRONG_NUM_OF_COMMA ": Wrong number of comma"
@@ -68,9 +69,8 @@ typedef struct s_map_conf {
 }	t_map_conf;
 
 //	map/map_elem.c
-void	set_element(char *line, t_elem elem, t_map_conf *const conf);
+int		set_element(char *line, t_elem elem, t_map_conf *const conf);
 t_elem	get_element_type(char *line);
-void	set_raw_map(int fd, char *const line, t_map_conf *const conf);
 
 //	map/map_error.c
 int		set_err(t_map_conf *const d, const t_elem e, const char *msg);
@@ -83,6 +83,9 @@ void	print_dynamic_err_msg(const char *msg);
 void	init_map_conf(t_map_conf *const conf);
 void	set_map_conf(int fd, t_map_conf *const conf);
 void	free_map_conf(t_map_conf *const conf);
+
+//	map/map_rawmap.c
+void	set_raw_map(int fd, char *const line, t_map_conf *const conf);
 
 //	map/map_utils.c
 int		is_space(const unsigned char c);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_elem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:18:33 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 15:29:44 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parser.h"
 
-void	set_element(char *line, t_elem elem, t_map_conf *const conf)
+int	set_element(char *line, t_elem elem, t_map_conf *const conf)
 {
 	int		i;
 
@@ -22,21 +22,16 @@ void	set_element(char *line, t_elem elem, t_map_conf *const conf)
 	if (CEILING <= elem && elem <= FLOOR)
 	{
 		if (conf->color_str[elem - CEILING])
-		{
-			free(conf->color_str[elem - CEILING]);
-			conf->color_str[elem - CEILING] = NULL;
-		}
+			return (set_err(conf, elem, DOUBLE_KEYS));
 		conf->color_str[elem - CEILING] = ft_strrtrim(line + i);
 	}
 	else if (EAST <= elem && elem <= NORTH)
 	{
 		if (conf->texture_path[elem])
-		{
-			free(conf->texture_path[elem]);
-			conf->texture_path[elem] = NULL;
-		}
+			return (set_err(conf, elem, DOUBLE_KEYS));
 		conf->texture_path[elem] = ft_strrtrim(line + i);
 	}
+	return (SUCCESS);
 }
 
 t_elem	get_element_type(char *line)

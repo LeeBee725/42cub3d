@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 10:40:34 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 15:26:09 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ void	set_map_conf(int fd, t_map_conf *const conf)
 			elem = get_element_type(line);
 			if (elem == MAP)
 				break ;
-			set_element(line, elem, conf);
+			if (set_element(line, elem, conf) == FAIL)
+			{
+				free(line);
+				exit_invalid_elem(conf, &print_dynamic_err_msg);
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
