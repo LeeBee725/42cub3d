@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 23:01:34 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:53:21 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 12:19:07 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ static int	_check(t_conf *const conf, char ***v, const int r, const int c)
 	i = 0;
 	while (i < 4)
 	{
-		if (0 <= r + dy[i] && r + dy[i] < conf->map_height \
-			&& 0 <= c + dx[i] && c + dx[i] < conf->map_width)
-		{
-			if ((*v)[r + dy[i]][c + dx[i]] == '0' && \
-				_check(conf, v, r + dy[i], c + dx[i]) == FAIL)
-				return (FAIL);
-		}
+		if (!(0 <= r + dy[i] && r + dy[i] < conf->map_height \
+			&& 0 <= c + dx[i] && c + dx[i] < conf->map_width))
+			return (FAIL);
+		if ((*v)[r + dy[i]][c + dx[i]] == '0' && \
+			_check(conf, v, r + dy[i], c + dx[i]) == FAIL)
+			return (FAIL);
 		++i;
 	}
 	return (SUCCESS);
@@ -54,6 +53,7 @@ static int	_check_all_path(t_conf *const conf, char ***visitted)
 				|| conf->c_map[r][c] == 'S' || conf->c_map[r][c] == 'N'))
 				if (_check(conf, visitted, r, c) == FAIL)
 					return (FAIL);
+			(*visitted)[r][c] = '1';
 			++c;
 		}
 		++r;
