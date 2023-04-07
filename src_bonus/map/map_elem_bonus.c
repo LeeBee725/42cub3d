@@ -6,17 +6,20 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 17:18:33 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:17 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:04 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parser.h"
+#include "map_parser_bonus.h"
 
 int	set_element(char *line, t_elem elem, t_map_conf *const conf)
 {
 	int		i;
 
-	i = 2;
+	if (CEILING <= elem && elem <= FLOOR)
+		i = 1;
+	else
+		i = 2;
 	while (is_space(line[i]))
 		++i;
 	if (CEILING <= elem && elem <= FLOOR)
@@ -36,14 +39,19 @@ int	set_element(char *line, t_elem elem, t_map_conf *const conf)
 
 t_elem	get_element_type(char *line)
 {
-	static const char	*identifier[6] = {"EA", "WE", "SO", "NO", "C ", "F "};
+	static const char	*id[6] = {"EA", "WE", "SO", "NO", "C", "F"};
 	t_elem				elem;
 
 	elem = EAST;
 	while (elem != MAP)
 	{
-		if (ft_strncmp(line, identifier[elem], 2) == 0)
-			return (elem);
+		if (ft_strncmp(line, id[elem], ft_strlen(id[elem])) == 0)
+		{
+			if (is_space(line[ft_strlen(id[elem])]))
+				return (elem);
+			else
+				return (ELEM_FAIL);
+		}
 		++elem;
 	}
 	return (MAP);

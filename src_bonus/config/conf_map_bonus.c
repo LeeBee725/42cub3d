@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:21 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:58 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	_set_direction(t_conf *const conf, int axis, int option)
 {

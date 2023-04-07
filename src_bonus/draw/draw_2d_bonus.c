@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:49:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:20 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:59 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	_draw_player(t_conf *conf, t_ray *ray)
 {

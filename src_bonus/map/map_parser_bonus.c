@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 16:55:38 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:16 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:07 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parser.h"
+#include "map_parser_bonus.h"
 
 void	init_map_conf(t_map_conf *const conf)
 {
@@ -62,9 +62,11 @@ void	set_map_conf(int fd, t_map_conf *const conf)
 			elem = get_element_type(line);
 			if (elem == MAP)
 				break ;
-			if (set_element(line, elem, conf) == FAIL)
+			if (elem == ELEM_FAIL || set_element(line, elem, conf) == FAIL)
 			{
 				free(line);
+				if (elem == ELEM_FAIL)
+					set_err(conf, ELEM_FAIL, ELEM_INVALID);
 				exit_invalid_elem(conf, &print_dynamic_err_msg);
 			}
 		}

@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 16:28:55 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:21 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:51 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	init_img(t_img *const img)
 {

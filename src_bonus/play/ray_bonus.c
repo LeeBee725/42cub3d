@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:30:44 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:13 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:12 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	set_step(t_ray *ray)
 {

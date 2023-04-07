@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:22:30 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:12 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:13 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	_validate_color_str(t_map_conf *const conf, const char *str, const t_elem e)
 {

@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:28:39 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:11 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:14 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	validate_img_ext(t_map_conf *const conf)
 {

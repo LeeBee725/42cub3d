@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 20:56:16 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:23 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:43 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	_set_color(t_color *color, t_map_conf *const conf, const t_elem e)
 {

@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:24:35 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:10 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:15 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	_is_valid_char(char c)
 {

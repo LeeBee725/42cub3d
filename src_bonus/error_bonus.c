@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:29:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:07 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:00:39 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "error_bonus.h"
 
 void	print_err_msg(const char *msg)
 {

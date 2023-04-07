@@ -6,7 +6,7 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/07 15:44:57 by junhelee         ###   ########.fr        #
+#    Updated: 2023/04/07 17:02:05 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,11 @@ LIBFT	:=	./libft
 UNAME_S	:=	$(shell uname -s)
 ifeq ($(UNAME_S), Darwin)
 MLX_DIR	:=	./mlx
+BONUS_INCLUDES:=	-I./include_bonus -I$(LIBFT) -I$(MLX_DIR)
 INCLUDES:=	-I./include -I$(LIBFT) -I$(MLX_DIR)
 else
 MLX_DIR	:=	./mlx_linux
+BONUS_INCLUDES:=	-I./include_bonus -I$(LIBFT) -I$(MLX_DIR)
 INCLUDES:=	-I./include -I$(LIBFT) -I$(MLX_DIR) -O3
 endif
 
@@ -68,7 +70,7 @@ $(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
 
 $(OBJ_DIR)/%.o : $(BONUS_SRCS_DIR)/%.c
 	@$(MKDIR) $(O_DIRS)
-	$(COMPILE) $(INCLUDES) -c $< -o $@
+	$(COMPILE) $(BONUS_INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C $(LIBFT) bonus
@@ -102,6 +104,7 @@ re:
 
 norm:
 	@$(NORM) ./include
+	@$(NORM) ./include_bonus
 	@$(NORM) $(SRCS_DIR)
 	@$(NORM) $(BONUS_SRCS_DIR)
 

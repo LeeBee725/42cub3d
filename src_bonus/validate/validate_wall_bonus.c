@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 23:01:34 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:09 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:16 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	_check(t_conf *const conf, char ***v, const int r, const int c)
 {

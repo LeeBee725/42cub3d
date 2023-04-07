@@ -6,11 +6,11 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:35:15 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:01:09 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	is_space(const unsigned char c)
 {
