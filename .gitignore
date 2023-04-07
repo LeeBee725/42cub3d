@@ -4,4 +4,5 @@
 *.o
 *.a
 cub3D
+cub3D_bonus
 test.sh
