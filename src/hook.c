@@ -6,13 +6,13 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 10:38:39 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:18:27 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	_close_window(t_conf *conf)
+int	close_window(t_conf *conf)
 {
 	free_config(conf);
 	exit(NO_ERROR);
@@ -42,10 +42,8 @@ int	loop(t_conf *conf)
 
 int	key_handle(int key, t_conf *conf)
 {
-	if (key == KEY_EXIT)
-		_close_window(conf);
-	else if (key == KEY_ESC)
-		_close_window(conf);
+	if (key == KEY_ESC)
+		close_window(conf);
 	if (key == KEY_W)
 		move(conf, TRUE, FALSE);
 	else if (key == KEY_S)

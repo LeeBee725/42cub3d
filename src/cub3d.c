@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:54:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 10:40:05 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:19:24 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char *argv[])
 	init_conf(&conf);
 	set_conf(argv[1], &conf);
 	mlx_hook(conf.win, KEY_PRESS, 0, &key_handle, &conf);
+	mlx_hook(conf.win, ON_DESTROY, 0, &close_window, &conf);
 	mlx_loop_hook(conf.mlx, &loop, &conf);
 	mlx_loop(conf.mlx);
 	return (NO_ERROR);

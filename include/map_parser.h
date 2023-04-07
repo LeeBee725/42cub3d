@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 11:07:03 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:24:51 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "libft.h"
 # include "error.h"
 
-# define TRUE 1
-# define FALSE 0
 # define SUCCESS 1
 # define FAIL -1
 # define MALLOC_FAIL -2
@@ -69,35 +67,36 @@ typedef struct s_map_conf {
 	t_list	*raw_map;
 }	t_map_conf;
 
-void	init_map_conf(t_map_conf *const conf);
-void	set_map_conf(int fd, t_map_conf *const conf);
-void	free_map_conf(t_map_conf *const conf);
-
-//	map_elem.c
+//	map/map_elem.c
 void	set_element(char *line, t_elem elem, t_map_conf *const conf);
 t_elem	get_element_type(char *line);
 void	set_raw_map(int fd, char *const line, t_map_conf *const conf);
 
-//	map_error.c
+//	map/map_error.c
 int		set_err(t_map_conf *const d, const t_elem e, const char *msg);
 int		set_err_with_res(t_map_conf *const d, const t_elem e, \
 						const char *resource, const char *msg);
 void	exit_invalid_elem(t_map_conf *const conf, void (*f)(const char *msg));
 void	print_dynamic_err_msg(const char *msg);
 
-//	map_utils.c
+//	map/map_parser.c
+void	init_map_conf(t_map_conf *const conf);
+void	set_map_conf(int fd, t_map_conf *const conf);
+void	free_map_conf(t_map_conf *const conf);
+
+//	map/map_utils.c
 int		is_space(const unsigned char c);
 int		is_empty_line(char *line);
 char	*ft_strrtrim(const char *str);
 
-//	validate_color.c
+//	validate/validate_color.c
 int		validate_color_str(t_map_conf *const map_conf);
 int		validate_color(t_map_conf *const map_conf, const char *str, t_elem e);
 
-//	validate_img.c
+//	validate/validate_img.c
 int		validate_img_ext(t_map_conf *const conf);
 
-//	validate_map.c
+//	validate/validate_map.c
 int		validate_map_has_empty_line(t_map_conf *const conf);
 int		validate_map_char(t_map_conf *const conf);
 int		validate_map_one_player(t_map_conf *const conf);

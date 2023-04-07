@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:51:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:09:39 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 11:13:15 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parser.h"
+#include "cub3d.h"
 
 int	is_space(const unsigned char c)
 {

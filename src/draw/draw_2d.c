@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:49:32 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 19:59:43 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 11:26:52 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_player(t_conf *conf, t_ray *ray)
+static void	_draw_player(t_conf *conf, t_ray *ray)
 {
 	int	x;
 	int	y;
@@ -32,7 +32,7 @@ void	draw_player(t_conf *conf, t_ray *ray)
 	}
 }
 
-void	draw_rectangle(t_conf *conf, int x, int y, int fill)
+static void	_draw_rectangle(t_conf *conf, int x, int y, int fill)
 {
 	int	color;
 	int	i;
@@ -71,7 +71,7 @@ void	draw_map_2d(t_conf *conf)
 		x = 0;
 		while (x < conf->map_width)
 		{
-			draw_rectangle(conf, x, y, conf->map[y][x]);
+			_draw_rectangle(conf, x, y, conf->map[y][x]);
 			x++;
 		}
 		y++;
@@ -84,7 +84,7 @@ void	draw_ray_2d(t_conf *conf, t_ray *ray)
 	double	y;
 	int		i;
 
-	draw_player(conf, ray);
+	_draw_player(conf, ray);
 	i = 0;
 	while (i < 40)
 	{

@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 13:52:45 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 10:40:54 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 11:30:47 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,36 +37,13 @@
 # define BLACK 0x00000000
 # define GRAY 0x00555555
 # define RED 0x00FF0000
-# define YELLOW 0x00FFFF00
 # define BLUE 0x000000FF
 # define KEY_PRESS 2
-# define KEY_EXIT 17
+# define ON_DESTROY 17
 # define KEY_A 0
-# define KEY_B 11
-# define KEY_C 8
 # define KEY_D 2
-# define KEY_E 14
-# define KEY_F 3
-# define KEY_G 5
-# define KEY_H 4
-# define KEY_I 34
-# define KEY_J 38
-# define KEY_K 40
-# define KEY_L 37
-# define KEY_M 46
-# define KEY_N 45
-# define KEY_O 31
-# define KEY_P 35
-# define KEY_Q 12
-# define KEY_R 15
 # define KEY_S 1
-# define KEY_T 17
-# define KEY_U 32
-# define KEY_V 9
 # define KEY_W 13
-# define KEY_X 7
-# define KEY_Y 16
-# define KEY_Z 6
 # define KEY_ESC 53
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
@@ -136,40 +113,39 @@ typedef struct s_ray
 	int		grid;
 }	t_ray;
 
+//	config/conf_cmap.c
+void	set_charmap(t_conf *const conf, t_map_conf *const map_conf);
+
 //	config/conf_color.c
 void	set_color(t_conf *const conf, t_map_conf *const map_conf);
+
+//	config/conf_free.c
+void	free_2d(char **arr);
+void	free_config(t_conf *const conf);
 
 //	config/conf_image.c
 void	init_img(t_img *const img);
 void	set_texture(t_conf *const conf, t_map_conf *const map_conf);
 
-//	config/conf_charmap.c
-void	set_charmap(t_conf *const conf, t_map_conf *const map_conf);
-
 //	config/conf_map.c
 void	set_map(t_conf *const conf);
 
-// conf_free.c
-void	free_2d(char **arr);
-void	free_config(t_conf *const conf);
-
-//	config.c
+//	config/config.c
 void	init_conf(t_conf *const conf);
 void	set_conf(char *const file_name, t_conf *const conf);
 
-// image.c
+//	draw/draw_2d.c
+void	draw_map_2d(t_conf *conf);
+void	draw_ray_2d(t_conf *conf, t_ray *ray);
+
+//	draw/draw_3d.c
+void	draw_map_3d(t_conf *conf);
+void	draw_object_3d(t_conf *conf, t_ray *ray, int x);
+
+//	draw/image.c
 t_ui	**image_to_array(t_img *img);
 void	make_image(t_conf *conf);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
-
-//	draw/draw_player.c
-void	draw_player(t_conf *conf, t_ray *ray);
-
-//	draw/draw.c
-void	draw_map_2d(t_conf *conf);
-void	draw_ray_2d(t_conf *conf, t_ray *ray);
-void	draw_map_3d(t_conf *conf);
-void	draw_object_3d(t_conf *conf, t_ray *ray, int x);
 
 //	draw/render.c
 void	render(t_conf *conf);
@@ -192,5 +168,6 @@ int		validate_map_surrounded_wall(t_conf *const conf);
 //	hook.c
 int		loop(t_conf *conf);
 int		key_handle(int key, t_conf *conf);
+int		close_window(t_conf *conf);
 
 #endif
