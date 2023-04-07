@@ -6,7 +6,7 @@
 /*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/07 15:23:25 by junhelee         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:43:39 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@
 # define INVALID_CEILING "Invaild conf of color of CEILING"
 # define INVALID_FLOOR "Invaild conf of color of FLOOR"
 # define INVALID_MAP "Invaild MAP"
+# define INVALID_ELEM "Invalid Element"
 
 # define VALUE_IS_NULL ": This value is NULL"
 # define IMG_MUST_BE ": The texture file must be "
 # define DOUBLE_KEYS ": The element is duplicated"
+# define ELEM_INVALID ": The element is invalid"
 
 # define COLOR_UNDEFINED ": Undefined character"
 # define COLOR_WRONG_NUM_OF_COMMA ": Wrong number of comma"
@@ -55,7 +57,8 @@ typedef enum e_elem {
 	NORTH,
 	CEILING,
 	FLOOR,
-	MAP
+	MAP,
+	ELEM_FAIL
 }	t_elem;
 
 typedef struct s_map_conf {

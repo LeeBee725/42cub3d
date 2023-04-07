@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 20:50:13 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 14:44:28 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 16:43:02 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	set_err_with_res(t_map_conf *const d, const t_elem e, \
 
 void	exit_invalid_elem(t_map_conf *const to_free, void (*f)(const char *msg))
 {
-	static const char	*msg[7] = {
+	static const char	*msg[8] = {
 		INVALID_EAST, INVALID_WEST, INVALID_SOUTH, INVALID_NORTH, \
-		INVALID_CEILING, INVALID_FLOOR, INVALID_MAP};
+		INVALID_CEILING, INVALID_FLOOR, INVALID_MAP, INVALID_ELEM};
 	char				*err_msg;
 
 	if (f == perror_dynamic_err_msg)
