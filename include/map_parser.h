@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 16:42:29 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:11:26 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 11:07:03 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define MAP_INVALID_CHAR ": The map has invalid character"
 # define MAP_NOT_ONLY_ONE ": The map must have ONLY one player"
 # define MAP_NOT_SURROUNDED_WALL ": The map must be closed/surrounded by walls"
+# define MAP_NO_PLAYER ": There is no player"
 
 typedef enum e_elem {
 	EAST,
@@ -71,9 +72,6 @@ typedef struct s_map_conf {
 void	init_map_conf(t_map_conf *const conf);
 void	set_map_conf(int fd, t_map_conf *const conf);
 void	free_map_conf(t_map_conf *const conf);
-
-// TODO: remove
-void	print_map_conf(t_map_conf conf);
 
 //	map_elem.c
 void	set_element(char *line, t_elem elem, t_map_conf *const conf);
@@ -102,6 +100,6 @@ int		validate_img_ext(t_map_conf *const conf);
 //	validate_map.c
 int		validate_map_has_empty_line(t_map_conf *const conf);
 int		validate_map_char(t_map_conf *const conf);
-int		validate_map_only_one_player(t_map_conf *const conf);
+int		validate_map_one_player(t_map_conf *const conf);
 
 #endif

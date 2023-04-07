@@ -3,7 +3,7 @@ WE ./image/eagle.xpm
 SO ./image/bluestone.xpm
 NO ./image/wood.xpm
 
-C 225,30,0
+C 225,30,0a
 F 220,100,0
 
 111111

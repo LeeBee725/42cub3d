@@ -1,4 +1,4 @@
-EA ./image/redbrick.xpm
+EA ./image/redbrick
 WE ./image/eagle.xpm
 SO ./image/bluestone.xpm
 NO ./image/wood.xpm

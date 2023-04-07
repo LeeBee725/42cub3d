@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conf_cmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:14:25 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 18:53:52 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 10:41:01 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ static int	_set_charmap(t_conf *const conf, t_map_conf *const map_conf)
 	return (SUCCESS);
 }
 
-static void	_print_map(t_conf *const conf); // TODO: remove after test
-
 void	set_charmap(t_conf *const conf, t_map_conf *const map_conf)
 {
 	if (validate_map_has_empty_line(map_conf) == FAIL \
 		|| validate_map_char(map_conf) == FAIL \
-		|| validate_map_only_one_player(map_conf) == FAIL)
+		|| validate_map_one_player(map_conf) == FAIL)
 	{
 		free_config(conf);
 		exit_invalid_elem(map_conf, &print_dynamic_err_msg);
@@ -58,7 +56,6 @@ void	set_charmap(t_conf *const conf, t_map_conf *const map_conf)
 		free_config(conf);
 		exit_with_err(SYS_HEAP_ALLOCATE_FAIL, &perror);
 	}
-	_print_map(conf);
 	if (validate_map_surrounded_wall(conf) == FAIL)
 	{
 		free_config(conf);
@@ -66,38 +63,4 @@ void	set_charmap(t_conf *const conf, t_map_conf *const map_conf)
 		map_conf->err_msg = ft_strdup(MAP_NOT_SURROUNDED_WALL);
 		exit_invalid_elem(map_conf, &print_dynamic_err_msg);
 	}
-}
-
-#include <stdio.h> //TODO: remove after test
-
-static void	_print_map(t_conf *const conf) // TODO: remove after test
-{
-	int	i;
-
-	if (!conf->c_map)
-	{
-		printf("Map:(null)\n");
-		return ;
-	}
-	printf("Map:\n");
-	i = 0;
-	while (i < conf->map_width + 2)
-	{
-		printf("#");
-		++i;
-	}
-	printf("\n");
-	i = 0;
-	while (conf->c_map[i])
-	{
-		printf("#%s#\n", conf->c_map[i]);
-		++i;
-	}
-	i = 0;
-	while (i < conf->map_width + 2)
-	{
-		printf("#");
-		++i;
-	}
-	printf("\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sryou <sryou@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:24:35 by junhelee          #+#    #+#             */
-/*   Updated: 2023/04/01 17:43:16 by sryou            ###   ########.fr       */
+/*   Updated: 2023/04/07 11:06:52 by junhelee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,31 @@ static int	_is_player_char(char c)
 	return (FALSE);
 }
 
-int	validate_map_only_one_player(t_map_conf *const conf)
+int	validate_map_one_player(t_map_conf *const conf)
 {
 	t_list	*cur;
 	int		i;
-	int		player_flag;
+	int		player_cnt;
 	char	*line;
 
 	cur = conf->raw_map;
-	player_flag = 0;
+	player_cnt = 0;
 	while (cur)
 	{
 		i = 0;
 		line = (char *)cur->content;
 		while (line && line[i])
 		{
+			if (player_cnt && _is_player_char(line[i]))
+				return (set_err_with_res(conf, MAP, line, \
+						MAP_NOT_ONLY_ONE));
 			if (_is_player_char(line[i]))
-			{
-				if (player_flag)
-					return (set_err_with_res(conf, MAP, line, \
-							MAP_NOT_ONLY_ONE));
-				player_flag = 1;
-			}
+				++player_cnt;
 			++i;
 		}
 		cur = cur->next;
 	}
+	if (!player_cnt)
+		return (set_err(conf, MAP, MAP_NO_PLAYER));
 	return (SUCCESS);
 }
