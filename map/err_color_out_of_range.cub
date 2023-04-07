@@ -1,0 +1,13 @@
+EA ./image/redbrick.xpm
+WE ./image/eagle.xpm
+SO ./image/bluestone.xpm
+NO ./image/wood.xpm
+
+C 225,511,0
+F 220,100,0
+
+111111
+100101
+101001
+1100N1
+111111
