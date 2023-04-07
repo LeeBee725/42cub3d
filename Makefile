@@ -6,7 +6,7 @@
 #    By: junhelee <junhelee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/17 13:17:08 by junhelee          #+#    #+#              #
-#    Updated: 2023/04/07 15:42:01 by junhelee         ###   ########.fr        #
+#    Updated: 2023/04/07 15:44:57 by junhelee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,5 +103,6 @@ re:
 norm:
 	@$(NORM) ./include
 	@$(NORM) $(SRCS_DIR)
+	@$(NORM) $(BONUS_SRCS_DIR)
 
 .PHONY: all clean fclean re norm bonus
